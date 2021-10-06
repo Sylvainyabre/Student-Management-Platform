@@ -2,8 +2,8 @@
 
 ### By *Sylvain Yabre*
 
-## Project Proposal:
-- ### What will the application do?
+## Project Proposal
+- ### What will the application do? ###
  
 The application will store and manage the list of classes in a school with their respective students. 
 Students in the same class take the same set of subjects. 
