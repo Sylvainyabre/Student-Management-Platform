@@ -1,6 +1,6 @@
 # Student Management System
 
-### By *Sylvain Yabre*
+### By *Sylvain Yabre* ###
 
 ## Project Proposal
 - ### What will the application do? ###
