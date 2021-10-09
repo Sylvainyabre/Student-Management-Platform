@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class GradeLevel {
@@ -11,12 +12,12 @@ public class GradeLevel {
             new KeyValuePair("Physical Education", 1), new KeyValuePair("Geography", 1), new KeyValuePair("History", 1),
             new KeyValuePair("Philosophy", 2)};
 
-    private String weight;
+    private String name;
     private ArrayList<Student> students;
 
 
     public GradeLevel(String name) {
-        this.weight = name;
+        this.name = name;
         students = new ArrayList<>();
 
 
@@ -27,13 +28,19 @@ public class GradeLevel {
     //EFFECTS:
     public ArrayList<Student> getStudentsRanking() {
         students.sort(Comparator.comparing(Student::getOverallGrade));
+        Collections.reverse(students);
+
+        return students;
+    }
+
+    public ArrayList<Student> getStudents() {
         return students;
     }
 
     //MODIFIES:
     //REQUIRES:
     //EFFECTS:
-    public ArrayList<Student> getStudentsAlphabetically() {
+    public ArrayList<Student> getStudentsAlphabeticallyOrdered() {
         students.sort(Comparator.comparing(Student::getLastName));
         return students;
 
@@ -43,7 +50,7 @@ public class GradeLevel {
     //REQUIRES:
     //EFFECTS:
     public String getName() {
-        return weight;
+        return name;
     }
 
 
@@ -51,7 +58,7 @@ public class GradeLevel {
     //REQUIRES:
     //EFFECTS:
     public int getRemainingNumberOfSpots() {
-        return students.size() - MAX_CAPACITY;
+        return MAX_CAPACITY - students.size();
     }
 
     //MODIFIES:
@@ -70,8 +77,10 @@ public class GradeLevel {
     //REQUIRES:
     //EFFECTS:
     public boolean registerStudent(Student student) {
-        if (MAX_CAPACITY - students.size() >= 1) {
+        if (students.size() < MAX_CAPACITY) {
             setStudentSubjects(student);
+            student.setId(students.size() + 1);
+            student.setGradeLevel(this);
             students.add(student);
             return true;
         } else {
@@ -91,7 +100,7 @@ public class GradeLevel {
 
     //REQUIRES: there is a student in this grade level with the provided id
     //EFFECTS: Returns the student having the given id number
-    public Student findStudentById(long id) {
+    public Student findStudentById(int id) {
         for (Student student : students) {
             if (student.getId() == id) {
                 return student;

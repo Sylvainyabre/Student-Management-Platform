@@ -16,9 +16,9 @@ public class Subject {
     public Subject(String name, int weight) {
         this.name = name;
         this.weight = weight;
-        this.firstMidtermGrade = 0;
-        this.secondMidtermGrade = 0;
-        this.finalExamGrade = 0;
+        firstMidtermGrade = 0;
+        secondMidtermGrade = 0;
+        finalExamGrade = 0;
 
     }
 

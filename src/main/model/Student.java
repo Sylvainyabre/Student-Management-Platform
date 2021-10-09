@@ -7,16 +7,16 @@ import java.util.Objects;
 public class Student {
     private String firstName;
     private String lastName;
-    private long id;
+    private int id;
     private ArrayList<Subject> gradeRecord;
     private GradeLevel gradeLevel;
 
     //constructor
     public Student(String first, String last) {
-        this.firstName = first;
-        this.lastName = last;
+        this.firstName = capitalizeName(first);
+        this.lastName = capitalizeName(last);
         this.gradeLevel = null;
-        this.id = System.currentTimeMillis();
+        this.id = 0;
         this.gradeRecord = new ArrayList<>();
 
     }
@@ -89,7 +89,7 @@ public class Student {
     //EFFECTS:
     public boolean updateSubjectGrade(String subjectName, double grade, int examNumber) {
         for (Subject subject : gradeRecord) {
-            if (Objects.equals(subject.getName(), subjectName)) {
+            if (Objects.equals(subject.getName().toLowerCase(), subjectName.toLowerCase())) {
                 changeSubjectGrade(subject, grade, examNumber);
                 return true;
             }
@@ -113,5 +113,11 @@ public class Student {
     //MODIFIES:
     //REQUIRES:
     //EFFECTS:
+    public static String capitalizeName(String name) {
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }
