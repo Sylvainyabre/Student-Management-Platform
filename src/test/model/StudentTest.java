@@ -33,6 +33,13 @@ class StudentTest {
         assertEquals("Fake Student",testStudent.getFullName());
     }
     @Test
+    void testSetId(){
+        assertEquals(0,testStudent.getId());
+        testStudent.setId(1234);
+        assertEquals(1234,testStudent.getId());
+
+    }
+    @Test
     void testSetGradeLevel(){
         assertNull(testStudent.getGradeLevel());
         testStudent.setGradeLevel(testGradeLevel);
@@ -82,6 +89,8 @@ class StudentTest {
         testStudent.addSubject(subject);
         assertFalse(testStudent.updateSubjectGrade("Second", 18, 2));
         assertFalse(testStudent.updateSubjectGrade("test subject", 17, 3));
+        assertFalse(testStudent.updateSubjectGrade("test subject", 17, 4));
+        assertFalse(testStudent.updateSubjectGrade("test subject", 17, 0));
         assertEquals(0,testStudent.getGradeRecord().get(0).getFirstMidtermGrade());
         assertEquals(0,testStudent.getGradeRecord().get(0).getSecondMidtermGrade());
         assertEquals(0,testStudent.getGradeRecord().get(0).getFinalExamGrade());

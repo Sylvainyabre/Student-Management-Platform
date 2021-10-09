@@ -90,8 +90,8 @@ public class Student {
     public boolean updateSubjectGrade(String subjectName, double grade, int examNumber) {
         for (Subject subject : gradeRecord) {
             if (Objects.equals(subject.getName().toLowerCase(), subjectName.toLowerCase())) {
-                changeSubjectGrade(subject, grade, examNumber);
-                return true;
+                return changeSubjectGrade(subject, grade, examNumber);
+
             }
         }
         return false;
@@ -100,13 +100,18 @@ public class Student {
     //MODIFIES:
     //REQUIRES:
     //EFFECTS:
-    public static void changeSubjectGrade(Subject subject, double grade, int examNumber) {
-        if (examNumber == 1) {
+    public static boolean changeSubjectGrade(Subject subject, double grade, int examNumber) {
+        if (examNumber < 1 || examNumber > 3) {
+            return false;
+        } else if (examNumber == 1) {
             subject.setFirstMidtermGrade(grade);
+            return true;
         } else if (examNumber == 2) {
             subject.setSecondMidtermGrade(grade);
-        } else if (examNumber == 3) {
+            return true;
+        } else {
             subject.setFinalExamGrade(grade);
+            return true;
         }
     }
 
