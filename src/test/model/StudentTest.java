@@ -9,11 +9,14 @@ import org.junit.jupiter.api.Test;
 class StudentTest {
     Student testStudent;
     Subject testSubject;
+    GradeLevel testGradeLevel;
 
     @BeforeEach
     void setup() {
         testStudent = new Student("fake", "student");
         testSubject = new Subject("Test", 1);
+        testGradeLevel = new GradeLevel("Test Grade Level");
+
     }
 
     @Test
@@ -25,6 +28,16 @@ class StudentTest {
         assertEquals(0, fakeStudent.getId());
         assertEquals(0, fakeStudent.getGradeRecord().size());
     }
+    @Test
+    void testGetFullName(){
+        assertEquals("Fake Student",testStudent.getFullName());
+    }
+    @Test
+    void testSetGradeLevel(){
+        assertNull(testStudent.getGradeLevel());
+        testStudent.setGradeLevel(testGradeLevel);
+        assertEquals("Test Grade Level",testStudent.getGradeLevel().getName());
+    }
 
     @Test
     void testAddSubject() {
@@ -34,25 +47,32 @@ class StudentTest {
     }
 
     @Test
-    void testUpdateSubjectGradeSuccess() {
-        Subject subject = new Subject("second subject", 2);
+    void testUpdateSubjectGradeFirstMidtermSuccess() {
         testStudent.addSubject(testSubject);
-        testStudent.addSubject(subject);
-        testStudent.updateSubjectGrade("seconD Subject", 15, 1);
-        assertEquals(15, testStudent.getGradeRecord().get(1).getFirstMidtermGrade());
-        assertEquals(0, testStudent.getGradeRecord().get(1).getSecondMidtermGrade());
-        assertEquals(0, testStudent.getGradeRecord().get(1).getFinalExamGrade());
 
-        testStudent.updateSubjectGrade("Test", 16, 3);
+        assertTrue(testStudent.updateSubjectGrade("Test", 16, 1));
+        assertEquals(16, testStudent.getGradeRecord().get(0).getFirstMidtermGrade());
+        assertEquals(0, testStudent.getGradeRecord().get(0).getSecondMidtermGrade());
+        assertEquals(0, testStudent.getGradeRecord().get(0).getFinalExamGrade());
+
+
+    }
+    @Test
+    void testUpdateSubjectGradeSecondMidtermSuccess(){
+        testStudent.addSubject(testSubject);
+        testStudent.updateSubjectGrade("test", 15, 2);
+        assertEquals(0, testStudent.getGradeRecord().get(0).getFirstMidtermGrade());
+        assertEquals(15, testStudent.getGradeRecord().get(0).getSecondMidtermGrade());
+        assertEquals(0, testStudent.getGradeRecord().get(0).getFinalExamGrade());
+
+    }
+    @Test
+    void testUpdateSubjectGradeFinalExamSuccess(){
+        testStudent.addSubject(testSubject);
+        testStudent.updateSubjectGrade("TEST", 18, 3);
         assertEquals(0, testStudent.getGradeRecord().get(0).getFirstMidtermGrade());
         assertEquals(0, testStudent.getGradeRecord().get(0).getSecondMidtermGrade());
-        assertEquals(16, testStudent.getGradeRecord().get(0).getFinalExamGrade());
-
-        testStudent.updateSubjectGrade("TEST", 18, 2);
-        assertEquals(0, testStudent.getGradeRecord().get(0).getFirstMidtermGrade());
-        assertEquals(18, testStudent.getGradeRecord().get(0).getSecondMidtermGrade());
-        assertEquals(16, testStudent.getGradeRecord().get(0).getFinalExamGrade());
-
+        assertEquals(18, testStudent.getGradeRecord().get(0).getFinalExamGrade());
 
     }
     @Test
