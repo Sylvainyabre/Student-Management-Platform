@@ -16,6 +16,7 @@ public class Subject {
     // constructor
     //REQUIRES: weight is a positive integer
     //EFFECTS:  creates a subject named name and with weight = weight
+            // initializes the three grades to 0
     public Subject(String name, int weight) {
         this.name = name;
         this.weight = weight;

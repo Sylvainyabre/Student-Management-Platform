@@ -25,8 +25,7 @@ public class SubjectTest {
 
     @Test
     void testGetSubjectGradeDefaultGrades() {
-        assertEquals(0, testSubject.getSubjectGrade());
-
+       assertEquals(0, testSubject.getSubjectGrade());
     }
 
     @Test
