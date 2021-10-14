@@ -30,7 +30,8 @@ class StudentTest {
     }
     @Test
     void testGetFullName(){
-        assertEquals("Fake Student",testStudent.getFullName());
+        assertEquals(testStudent.getFirstName() + " "
+                + testStudent.getLastName(),testStudent.getFullName());
     }
     @Test
     void testSetId(){

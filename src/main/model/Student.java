@@ -80,7 +80,7 @@ public class Student {
     //REQUIRES:
     //EFFECTS:
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

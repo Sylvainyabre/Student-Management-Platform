@@ -74,46 +74,6 @@ public class GradeLevelTest {
         assertTrue(fullGradeLevel.removeStudentFromClass(50));
         assertEquals(72,fullGradeLevel.getStudents().size());
     }
-    @Test
-    void testGetStudentsAlphabeticallyOrderedMany() {
-        Student firstStudent = new Student("Mario", "Super");
-        Student secondStudent = new Student("Pat", "Stan");
-        Student thirdStudent = new Student("Stan", "Pat");
-        Student fourthStudent = new Student("Zapata", "Watapa");
-        Student fifthStudent = new Student("Zipita", "Wotapa");
-        Student sixthStudent = new Student("Wotapa", "aZepata");
-        Student seventhStudent = new Student("Wotapa", "Zipita");
-        Student eightStudent = new Student("Wotapa", "Zipota");
-        Student ninthStudent = new Student("Wotapa", "Zepata");
-        Student tenthStudent = new Student("Wotapa", "xZepata");
-        Student elenventhStudent = new Student("Wotapa", "aZepata1");
-        gradeLevel.registerStudent(firstStudent);
-        gradeLevel.registerStudent(secondStudent);
-        gradeLevel.registerStudent(thirdStudent);
-        gradeLevel.registerStudent(fourthStudent);
-        gradeLevel.registerStudent(fifthStudent);
-        gradeLevel.registerStudent(sixthStudent);
-        gradeLevel.registerStudent(seventhStudent);
-        gradeLevel.registerStudent(eightStudent);
-        gradeLevel.registerStudent(ninthStudent);
-        gradeLevel.registerStudent(tenthStudent);
-        gradeLevel.registerStudent(elenventhStudent);
-
-        ArrayList<Student> orderedStudents = gradeLevel.getStudentsAlphabeticallyOrdered();
-        assertEquals("Wotapa Azepata", orderedStudents.get(0).getFullName());
-        assertEquals("Wotapa Azepata1", orderedStudents.get(1).getFullName());
-        assertEquals("Stan Pat", orderedStudents.get(2).getFullName());
-        assertEquals("Pat Stan", orderedStudents.get(3).getFullName());
-        assertEquals("Mario Super", orderedStudents.get(4).getFullName());
-        assertEquals("Zapata Watapa", orderedStudents.get(5).getFullName());
-        assertEquals("Zipita Wotapa", orderedStudents.get(6).getFullName());
-        assertEquals("Wotapa Xzepata", orderedStudents.get(7).getFullName());
-        assertEquals("Wotapa Zepata", orderedStudents.get(8).getFullName());
-        assertEquals("Wotapa Zipita", orderedStudents.get(9).getFullName());
-        assertEquals("Wotapa Zipota", orderedStudents.get(10).getFullName());
-
-
-    }
 
     @Test
     void testGetRemainingNumberOfSpotsEmpty() {
@@ -169,7 +129,6 @@ public class GradeLevelTest {
         gradeLevel.registerStudent(fourthStudent);
         gradeLevel.registerStudent(fifthStudent);
 
-        Student sixthStudent = new Student("Wotapa", "aZepata");
         for (Subject subject : firstStudent.getGradeRecord()) {
             subject.setFirstMidtermGrade(10);
             subject.setSecondMidtermGrade(13);

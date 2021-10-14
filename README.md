@@ -32,13 +32,11 @@ of time and effort to complete. Building this application is for me a chance to 
 1. As a user, I want to be able to create a class (a.k.a grade level) with preset maximum capacity.
 2. As a user, I want to be able to register/add multiple students in an existing class, provided that space is available
 3. As a user, I want to be able to check the number of spots remaining in a class
-4. As a user, I want to  a find a student by ID. 
-5. As a user, I want to be able to edit/update the personal info of an existing student in a class. 
-6. As a user, I want to be able to delete an existing student from a class. 
-7. As a user, I want to be able to add grades to a student's record after exams. 
-8. As a user, I want to be able to show the list of all students in class ranked by overall GPA. 
-9. As a user, I want to be able to show the top n students based on grade in a given subject. 
-10. As a user, I want to be able to print the transcript of a student.
+4. As a user, I want to  a find a student by ID in a given class. 
+5. As a user, I want to be able to update the grades of an existing student in a class.
+6. As a user, I want to be able to show the list of all students in class ranked by overall GPA.
+7. As a user, I want to be able to print the transcript of a student.
+
 
 
 

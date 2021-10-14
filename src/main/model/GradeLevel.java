@@ -30,6 +30,7 @@ public class GradeLevel {
         students.sort(Comparator.comparing(Student::getOverallGrade));
         Collections.reverse(students);
 
+
         return students;
     }
 
@@ -37,14 +38,17 @@ public class GradeLevel {
         return students;
     }
 
-    //MODIFIES:
+   /* //MODIFIES:
     //REQUIRES:
     //EFFECTS:
     public ArrayList<Student> getStudentsAlphabeticallyOrdered() {
         students.sort(Comparator.comparing(Student::getLastName));
+        Collections.reverse(students);
+
+
         return students;
 
-    }
+    }*/
 
     //MODIFIES:
     //REQUIRES:
