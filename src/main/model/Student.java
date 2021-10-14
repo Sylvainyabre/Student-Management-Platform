@@ -3,15 +3,18 @@ package model;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
+// represents a student with a first name, a last name, and id number,
+// class registered in and subjects tthe student is taking
 public class Student {
     private String firstName;
     private String lastName;
     private int id;
-    private ArrayList<Subject> gradeRecord;
-    private GradeLevel gradeLevel;
+    private ArrayList<Subject> gradeRecord; // subjects the student is taking
+    private GradeLevel gradeLevel; // class of the student
 
     //constructor
+    //EFFECTS: creates a new student with first name first and last name last,
+             // sets the student's grade/class to null, id to 0 and gradeRecord to an empty list.
     public Student(String first, String last) {
         this.firstName = capitalizeName(first);
         this.lastName = capitalizeName(last);
@@ -46,47 +49,49 @@ public class Student {
         gradeRecord.add(subject);
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
+
+    //REQUIRES: gradeRecord not empty
+    //EFFECTS:returns the student's overall GPA from all the courses taken,
+           // GPA is calculated as sum(subject grade * subject weight)/(sum of weights)
     public double getOverallGrade() {
         ArrayList<Subject> record = this.getGradeRecord();
         int totalCredits = record.stream().map(Subject::getWeight).reduce(0, Integer::sum);
         double sumOfRawGrades = record.stream().map(Subject::computeRawGrade).reduce(0.0, Double::sum);
         return sumOfRawGrades / (double) totalCredits;
     }
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
 
+
+    //EFFECTS: returns the class of the student
     public GradeLevel getGradeLevel() {
         return gradeLevel;
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
+
+
+    //EFFECTS: returns student's gradeRecord(subjects with their grades
     public ArrayList<Subject> getGradeRecord() {
         return gradeRecord;
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
+    //MODIFIES:this
+    //EFFECTS: sets the student's class to gradeLevel
     public void setGradeLevel(GradeLevel gradeLevel) {
         this.gradeLevel = gradeLevel;
     }
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
 
+
+    //EFFECTS:returns the student's id
     public int getId() {
         return id;
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
+    //MODIFIES: this
+    //REQUIRES: grade >= 0 and examNumber is one of (1,2,3)
+    //EFFECTS: finds the subject in the student's subjects named subjectName
+             // and sets its midterm1 grade to grade if examNumber is 1 and return true
+             // or if examNumber is 2, set midterm2 grade to grade and return true
+             //else if examNumber is 3 set finalExam grade to grade and return true,
+             // if no subject exists with the given name, return false
     public boolean updateSubjectGrade(String subjectName, double grade, int examNumber) {
 
         for (Subject subject : gradeRecord) {
@@ -99,9 +104,13 @@ public class Student {
         return false;
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
+    //MODIFIES: subject
+    //REQUIRES:grade >= 0 and examNumber is one of (1,2,3)
+    //EFFECTS: sets its midterm1 grade to grade if examNumber is
+            // or if examNumber is 2, set midterm2 grade to grade and return true
+            //else if examNumber is 3 set finalExam grade to grade and return true,
+           // if no subject exists with given name or if exam number is not one of (1,2,3),
+
     public static void changeSubjectGrade(Subject subject, double grade, int examNumber) {
         if (examNumber == 1) {
             subject.setFirstMidtermGrade(grade);
@@ -118,13 +127,16 @@ public class Student {
 
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
+    //MODIFIES: name
+    //EFFECTS: turns the first letter into a Capital letter and keep the rest in lower case,
+             // and then returns the transformed string
     public static String capitalizeName(String name) {
         return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
 
+    //MODIFIES: this
+    //REQUIRES: id is of type int
+    //EFFECTS: sets the student's id to the provided id
     public void setId(int id) {
         this.id = id;
     }

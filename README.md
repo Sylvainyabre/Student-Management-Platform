@@ -5,20 +5,19 @@
 ## Project Proposal
 - ### What will the application do? ###
  
-The application will store and manage the list of classes in a school with their respective students. 
-Students in the same class take the same set of subjects. 
+The application will store and manage the list of classes (as in a school) with their respective students. 
+All students take the same set of subjects. 
 Each subject will have three exams, two midterm exams worth 25% each and a final 
 exam worth 50%. The final grade for a student in a given grade level with be computed using this scheme.
-The application will  allow the admin to create a class, register new students, delete students who leave the school 
-or the class, or  update the personal information of existing students.  
-The application will rank all the students in a class based on  overall GPA and grade in each subject. 
+The application will  allow the admin to  register/add new students, delete students who leave the school 
+or the class, or  update the grades of existing students.   
 Also, the admin can print the list of all students in a class ranked by GPA/overall average
 Finally, the application can  print the transcript of a student.
 -------------
 - ### Who will use it?
  
-The application is intended to be used by a *high school principal* in charge of a particular grade/level
-or any school official in charge of managing students and grade reporting.
+The application is intended to be used by a *high school principal* 
+or any school official in charge of managing students and grade reporting them.
 - --------------
 - ### Why is this project of interest to you?
   
@@ -28,14 +27,15 @@ of time and effort to complete. Building this application is for me a chance to 
 
 ----------------------------
 - ## User stories
+- 
+1. As a user, I want to be able to register/add multiple students in an existing class, provided that space is available
+2. As a user, I want to be able to check the number of spots remaining in a any class
+3. As a user, I want to  a find a student by ID in a given class and update their grades.
+4. As a user, I want to be able to see the list of all students in class ranked by overall GPA.
+5. As a user, I want to be able to see the transcript of a student.
+6. As a user, I want to be able to see the summary information of a given class (spots available and number of students)
+7. As a user, I want to be able to remove a student from a class
 
-1. As a user, I want to be able to create a class (a.k.a grade level) with preset maximum capacity.
-2. As a user, I want to be able to register/add multiple students in an existing class, provided that space is available
-3. As a user, I want to be able to check the number of spots remaining in a class
-4. As a user, I want to  a find a student by ID in a given class. 
-5. As a user, I want to be able to update the grades of an existing student in a class.
-6. As a user, I want to be able to show the list of all students in class ranked by overall GPA.
-7. As a user, I want to be able to print the transcript of a student.
 
 
 
