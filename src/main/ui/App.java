@@ -28,8 +28,10 @@ public class App {
     }
 
     //MODIFIES: this
-    //EFFECTS: creates grade 7,8,9,10,11,12, displays command menu,
+    //EFFECTS: creates grades 7,8,9,10,11,12, displays command menu,
            //  processes user input and requests
+    // This method indirectly references code from the TellerApp class
+    // Link: [https://github.students.cs.ubc.ca/CPSC210/TellerApp.git]
     private void startApp() {
 
         boolean isRunning = true;
@@ -56,6 +58,7 @@ public class App {
     //MODIFIES: this
     //EFFECTS: executes the command chosen by the user
     //This method is inspired by the example in the TellApp
+    //Link: [https://github.students.cs.ubc.ca/CPSC210/TellerApp.git]
     private void executeCommand(String actionCommand) {
         if (actionCommand.equals("reg")) {
             registerStudent();
@@ -94,6 +97,7 @@ public class App {
         gradeTwelve = new GradeLevel("Grade 12");
 
         //the two lines below are taken from tellerApp, class repository
+        //https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
         userRequest = new Scanner(System.in);
         userRequest.useDelimiter("\n");
 
@@ -138,7 +142,7 @@ public class App {
 
     //MODIFIES:this
     //REQUIRES:lastName and firstName are strings
-    //EFFECTS: prompts the user to chose a grade, enter a first and last names
+    //EFFECTS: prompts the user to choose a class, enter a first and last names
            // creates a new student with lastName and firstName and adds it to the chosen class
     public void registerStudent() {
         String lastName;
@@ -203,7 +207,7 @@ public class App {
     }
 
     //MODIFIES:this
-    //REQUIRES: studentId is a positive integer
+    //REQUIRES: studentId is a positive integer >0
     //EFFECTS: prompts the user to choose a grade, enter a studentId,
              // finds the student with studentId and removes it from the selected class.
              // notifies the user if there is no student with provided id.
@@ -232,7 +236,7 @@ public class App {
     }
 
     //REQUIRES: studentId must be a positive integer > 0
-    //EFFECTS:prompts user to choose a grade, to enter a student id,
+    //EFFECTS:prompts user to choose a class, to enter a student id,
              // finds the student with the given id and prints the transcript accordingly
     public void displayStudentTranscript() {
         System.out.println("Enter the grade of the student: ");
@@ -307,7 +311,7 @@ public class App {
     }
 
     //MODIFIES:this
-    //REQUIRES: studentId and provided subject grade must be a positive integers,
+    //REQUIRES: studentId  must be an integer > 1 and provided subject grade must be a double in [0,20],
     //EFFECTS:prompts the user to select a class, a input a student id,
              // if a student exists with the provided id, prompts the user to selected exam to update the grade,
              // user inputs the new grade a the chosen grades gets set to the new value
@@ -357,7 +361,7 @@ public class App {
     }
 
     //MODIFIES: this
-    //REQUIRES: subjectIndex is one of (1,2,3) and newGrade is in [0,20]
+    //REQUIRES: subjectIndex is one of (1,2,3) and newGrade is a double in [0,20]
     //EFFECTS: prompts the user to choose a grade to update by enter SubjectIndex and newGrade
               // sets first midterm grade to newGrade if subjectIndex is 1
               // sets second midterm grade to newGrade if subjectIndex is 2
@@ -376,7 +380,7 @@ public class App {
     }
 
     //MODIFIES:this
-    //REQUIRES:newGrade is in [0,20], index is one of (1,2,3)
+    //REQUIRES:newGrade is a double in [0,20], index is one of (1,2,3)
     //EFFECTS: // sets first midterm grade to newGrade if index is 1
                   // sets second midterm grade to newGrade if index is 2
                   // else sets final exam grade to newGrade

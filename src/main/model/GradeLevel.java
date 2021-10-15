@@ -44,7 +44,7 @@ public class GradeLevel {
     }
 
 
-    //EFFECTS:returns the name of the class
+    //EFFECTS:returns the name of the student's class(this.name)
     public String getName() {
         return name;
     }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 // represents a student with a first name, a last name, and id number,
-// class registered in and subjects tthe student is taking
+// class registered in and subjects that the student is taking
 public class Student {
     private String firstName;
     private String lastName;
@@ -13,7 +13,7 @@ public class Student {
     private GradeLevel gradeLevel; // class of the student
 
     //constructor
-    //EFFECTS: creates a new student with first name first and last name last,
+    //EFFECTS: creates a new student with first name  and last name ,
              // sets the student's grade/class to null, id to 0 and gradeRecord to an empty list.
     public Student(String first, String last) {
         this.firstName = capitalizeName(first);
@@ -135,7 +135,7 @@ public class Student {
     }
 
     //MODIFIES: this
-    //REQUIRES: id is of type int
+    //REQUIRES: id is of type int and is positive and non-zero
     //EFFECTS: sets the student's id to the provided id
     public void setId(int id) {
         this.id = id;
