@@ -35,6 +35,8 @@ of time and effort to complete. Building this application is for me a chance to 
 5. As a user, I want to be able to see the transcript of a student.
 6. As a user, I want to be able to see the summary information of a given class (spots available and number of students)
 7. As a user, I want to be able to remove a student from a class
+8. As a user, I want to be able to save my all classes with their students and record to file whenever I quit my application;
+9. As a user, I want to be able to load my classes with their students and records from file whenever I open my application .
 
 
 
