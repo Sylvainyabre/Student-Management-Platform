@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -105,4 +108,23 @@ public class GradeLevel {
         return null;
     }
 
+    // EFFECTS: returns this as JSON object
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("students", studentsToJson());
+        return json;
+    }
+
+
+    //EFFECTS: returns students in this Gradelevel as a JSON array
+    private JSONArray studentsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Student student : students) {
+            jsonArray.put(student.toJson());
+        }
+
+        return jsonArray;
+    }
 }

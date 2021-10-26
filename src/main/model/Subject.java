@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // represents a subject with name, weight,first and second midterm grade,and a final exam grade
 public class Subject {
     public static final double FIRST_MIDTERM_WEIGHT = 0.25;
@@ -91,5 +93,17 @@ public class Subject {
         return firstMidtermGrade * FIRST_MIDTERM_WEIGHT
                 + secondMidtermGrade * SECOND_MIDTERM_WEIGHT
                 + finalExamGrade * FINAL_EXAM_WEIGHT;
+    }
+
+    //EFFECTS: transform a Subject into a JSON object
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("weight", weight);
+        json.put("firstMidtermGrade", firstMidtermGrade);
+        json.put("secondMidtermGrade", secondMidtermGrade);
+        json.put("finalExamGrade", finalExamGrade);
+
+        return json;
     }
 }
