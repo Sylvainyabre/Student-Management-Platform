@@ -52,10 +52,10 @@ public class JsonWriterTest extends JsonTest {
             Student fake = new Student("fake", "Student");
             Student Alain = new Student("Alain", "Yabre");
 
-            fakeGrade.registerStudent(new Student("Sylvain", "Yabre"));
-            fakeGrade.registerStudent(new Student("fake", "Student"));
-            fakeGrade.registerStudent(new Student("Alain", "Yabre"));
-            JsonWriter writer = new JsonWriter("./data/testGrade.json");
+            fakeGrade.registerStudent(Sylvain);
+            fakeGrade.registerStudent(fake);
+            fakeGrade.registerStudent(Alain);
+            JsonWriter writer = new JsonWriter("./data/testWriterGrade.json");
             writer.open();
             writer.write(fakeGrade);
             writer.close();
@@ -64,7 +64,7 @@ public class JsonWriterTest extends JsonTest {
             GradeLevel gradeFromFile = reader.read();
             checkGradeLevel("fake grade", gradeFromFile);
 
-            ArrayList<Student> students = fakeGrade.getStudents();
+            ArrayList<Student> students = gradeFromFile.getStudents();
             assertEquals(3, students.size());
             checkStudent("Sylvain", 1, students.get(0));
             checkStudent("Fake", 2, students.get(1));

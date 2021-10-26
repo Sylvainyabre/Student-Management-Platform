@@ -8,7 +8,7 @@ import java.io.*;
 
 //CREDITS: All the code in this class are copied from the Demo repository
 //REPO LINK https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-// Represents a writer that writes JSON representation of Gradelevel to file
+// Represents a writer that writes JSON representation of GradeLevel to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -23,7 +23,7 @@ public class JsonWriter {
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
     // be opened for writing
     public void open() throws FileNotFoundException {
-        writer = new PrintWriter(new File(destination));
+        writer = new PrintWriter(destination);
     }
 
     // MODIFIES: this

@@ -1,0 +1,57 @@
+{
+  "name": "test grade",
+  "students": [
+    {
+      "first": "Student 1",
+      "last": "1",
+      "id": 1,
+      "gradeRecord": [
+        {
+          "name": "Mathematics",
+          "weight": 5,
+          "firstMidtermGrade": 8.8,
+          "secondMidtermGrade": 10,
+          "finalExamGrade": 15.4
+        },
+        {
+          "name": "Physics",
+          "weight": 5,
+          "firstMidtermGrade": 18.8,
+          "secondMidtermGrade": 20,
+          "finalExamGrade": 15.4
+        },
+        {
+          "name": "English",
+          "weight": 2,
+          "firstMidtermGrade": 13.8,
+          "secondMidtermGrade": 10,
+          "finalExamGrade": 16.4
+        }
+      ]
+    },
+    {
+      "first": "Student 2",
+      "last": "2",
+      "id": 2,
+      "gradeRecord": [
+        {
+          "name": "English",
+          "weight": 2,
+          "firstMidtermGrade": 10.8,
+          "secondMidtermGrade": 20,
+          "finalExamGrade": 16.9
+        },
+        {
+          "name": "Physical Education",
+          "weight": 1,
+          "firstMidtermGrade": 15.8,
+          "secondMidtermGrade": 10,
+          "finalExamGrade": 10.9
+        }
+
+      ]
+    }
+  ]
+
+
+}

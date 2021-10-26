@@ -3,7 +3,11 @@ package ui;
 import model.GradeLevel;
 import model.Student;
 import model.Subject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,24 +19,43 @@ public class App {
     private GradeLevel gradeTen;
     private GradeLevel gradeEleven;
     private GradeLevel gradeTwelve;
+    //readers
+    private JsonReader grade7Reader;
+    private JsonReader grade8Reader;
+    private JsonReader grade9Reader;
+    private JsonReader grade10Reader;
+    private JsonReader grade11Reader;
+    private JsonReader grade12Reader;
+    //writers
+    private JsonWriter grade7Writer;
+    private JsonWriter grade8Writer;
+    private JsonWriter grade9Writer;
+    private JsonWriter grade10Writer;
+    private JsonWriter grade11Writer;
+    private JsonWriter grade12Writer;
 
     private ArrayList<GradeLevel> classes = new ArrayList<>();
     private Scanner userRequest;
 
     //constructor
     // EFFECTS: initializes the application
-             //
+    //
     public App() {
-        startApp();
+        try {
+            startApp();
+        } catch (IOException e) {
+            System.out.println("Failed to read classes from file");
+        }
+
 
     }
 
     //MODIFIES: this
     //EFFECTS: creates grades 7,8,9,10,11,12, displays command menu,
-           //  processes user input and requests
+    //  processes user input and requests
     // This method indirectly references code from the TellerApp class
     // Link: [https://github.students.cs.ubc.ca/CPSC210/TellerApp.git]
-    private void startApp() {
+    private void startApp() throws IOException {
 
         boolean isRunning = true;
         String actionCommand;
@@ -45,7 +68,11 @@ public class App {
             actionCommand = actionCommand.toLowerCase();
 
             if (actionCommand.equals("q")) {
+                System.out.println("Saving application state to file ...");
+                writeClasses();
+                System.out.println("Quitting...");
                 isRunning = false;
+
             } else {
                 executeCommand(actionCommand);
             }
@@ -87,17 +114,21 @@ public class App {
 
     //MODIFIES: this
     //EFFECTS: creates grade 7,8,9,10,11,12,and adds them to the list of classes,
-             // allow user input
-    public void setup() {
-        gradeSeven = new GradeLevel("Grade 7");
-        gradeEight = new GradeLevel("Grade 8");
-        gradeNine = new GradeLevel("Grade 9");
-        gradeTen = new GradeLevel("Grade 10");
-        gradeEleven = new GradeLevel("Grade 11");
-        gradeTwelve = new GradeLevel("Grade 12");
+    // allow user input, throws IOException if reading fails
+    public void setup() throws IOException {
+        grade7Reader = new JsonReader("./data/grade7.json");
+        grade8Reader = new JsonReader("./data/grade8.json");
+        grade9Reader = new JsonReader("./data/grade9.json");
+        grade10Reader = new JsonReader("./data/grade10.json");
+        grade11Reader = new JsonReader("./data/grade11.json");
+        grade12Reader = new JsonReader("./data/grade12.json");
 
-        //the two lines below are taken from tellerApp, class repository
-        //https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+        gradeSeven = grade7Reader.read();
+        gradeEight = grade8Reader.read();
+        gradeNine = grade9Reader.read();
+        gradeTen = grade10Reader.read();
+        gradeEleven = grade11Reader.read();
+        gradeTwelve = grade12Reader.read();
         userRequest = new Scanner(System.in);
         userRequest.useDelimiter("\n");
 
@@ -107,10 +138,54 @@ public class App {
         classes.add(gradeTen);
         classes.add(gradeEleven);
         classes.add(gradeTwelve);
+    }
+
+    //EFFECT:load gradeLevels from file
+    private void writeClasses() {
+        grade7Writer = new JsonWriter("./data/grade7.json");
+        grade8Writer = new JsonWriter("./data/grade8.json");
+        grade9Writer = new JsonWriter("./data/grade9.json");
+        grade10Writer = new JsonWriter("./data/grade10.json");
+        grade11Writer = new JsonWriter("./data/grade11.json");
+        grade12Writer = new JsonWriter("./data/grade12.json");
+
+        try {
+            openWriters();
+            grade7Writer.write(gradeSeven);
+            grade8Writer.write(gradeEight);
+            grade9Writer.write(gradeNine);
+            grade10Writer.write(gradeTen);
+            grade11Writer.write(gradeEleven);
+            grade12Writer.write(gradeTwelve);
+
+            closeWriters();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file");
+        }
 
 
     }
 
+    //EFFECT:open all files fro writing, throws FileNotFoundException if source not found
+    private void openWriters() throws FileNotFoundException {
+        grade7Writer.open();
+        grade8Writer.open();
+        grade9Writer.open();
+        grade10Writer.open();
+        grade11Writer.open();
+        grade12Writer.open();
+    }
+
+
+    //EFFECTS:close all files  throws FileNotFoundException if source not found
+    private void closeWriters() {
+        grade7Writer.close();
+        grade8Writer.close();
+        grade9Writer.close();
+        grade10Writer.close();
+        grade11Writer.close();
+        grade12Writer.close();
+    }
 
     //EFFECTS:displays command menu to the user
     private void showOptions() {
@@ -143,7 +218,7 @@ public class App {
     //MODIFIES:this
     //REQUIRES:lastName and firstName are strings
     //EFFECTS: prompts the user to choose a class, enter a first and last names
-           // creates a new student with lastName and firstName and adds it to the chosen class
+    // creates a new student with lastName and firstName and adds it to the chosen class
     public void registerStudent() {
         String lastName;
         String firstname;
@@ -209,8 +284,8 @@ public class App {
     //MODIFIES:this
     //REQUIRES: studentId is a positive integer >0
     //EFFECTS: prompts the user to choose a grade, enter a studentId,
-             // finds the student with studentId and removes it from the selected class.
-             // notifies the user if there is no student with provided id.
+    // finds the student with studentId and removes it from the selected class.
+    // notifies the user if there is no student with provided id.
     public void removeStudent() {
         System.out.println("Which grade do you want to delete a student from: ");
         GradeLevel chosenGrade = selectGradeLevel();
@@ -237,7 +312,7 @@ public class App {
 
     //REQUIRES: studentId must be a positive integer > 0
     //EFFECTS:prompts user to choose a class, to enter a student id,
-             // finds the student with the given id and prints the transcript accordingly
+    // finds the student with the given id and prints the transcript accordingly
     public void displayStudentTranscript() {
         System.out.println("Enter the grade of the student: ");
         GradeLevel chosenGrade = selectGradeLevel();
@@ -252,7 +327,6 @@ public class App {
 
 
     }
-
 
 
     //EFFECTS: prints out the student's personal info, along with subjects and their grades
@@ -297,7 +371,7 @@ public class App {
 
 
     //EFFECTS: prints out the id and full names of students registered in grade
-              // is registered student is empty, print a message to the user to let them know
+    // is registered student is empty, print a message to the user to let them know
     public void printStudents(GradeLevel grade) {
         ArrayList<Student> students = grade.getStudents();
         if (students.isEmpty()) {
@@ -313,8 +387,8 @@ public class App {
     //MODIFIES:this
     //REQUIRES: studentId  must be an integer > 1 and provided subject grade must be a double in [0,20],
     //EFFECTS:prompts the user to select a class, a input a student id,
-             // if a student exists with the provided id, prompts the user to selected exam to update the grade,
-             // user inputs the new grade a the chosen grades gets set to the new value
+    // if a student exists with the provided id, prompts the user to selected exam to update the grade,
+    // user inputs the new grade a the chosen grades gets set to the new value
     public void updateStudentGrades() {
         System.out.println("Selected the class of the student: ");
         GradeLevel chosenGrade = selectGradeLevel();
@@ -345,7 +419,7 @@ public class App {
 
     //REQUIRES: response must a positive integer >= 1 and <= 10
     //EFFECTS:prompts the user to select a subject to update by inputting an integer,
-              // returns subject with index response-1
+    // returns subject with index response-1
 
     public Subject chooseSubject(Student student) {
         ArrayList<Subject> subjects = student.getGradeRecord();
@@ -363,9 +437,9 @@ public class App {
     //MODIFIES: this
     //REQUIRES: subjectIndex is one of (1,2,3) and newGrade is a double in [0,20]
     //EFFECTS: prompts the user to choose a grade to update by enter SubjectIndex and newGrade
-              // sets first midterm grade to newGrade if subjectIndex is 1
-              // sets second midterm grade to newGrade if subjectIndex is 2
-              // sets final exam grade to newGrade if subjectIndex is 3
+    // sets first midterm grade to newGrade if subjectIndex is 1
+    // sets second midterm grade to newGrade if subjectIndex is 2
+    // sets final exam grade to newGrade if subjectIndex is 3
     public void updateSubjectGrade(Subject subject) {
 
         System.out.println("Enter 1 to update the first midterm grade");
@@ -382,8 +456,8 @@ public class App {
     //MODIFIES:this
     //REQUIRES:newGrade is a double in [0,20], index is one of (1,2,3)
     //EFFECTS: // sets first midterm grade to newGrade if index is 1
-                  // sets second midterm grade to newGrade if index is 2
-                  // else sets final exam grade to newGrade
+    // sets second midterm grade to newGrade if index is 2
+    // else sets final exam grade to newGrade
     public void executeGradeUpdate(Subject subject, int index, Double newGrade) {
         if (index == 1) {
             subject.setFirstMidtermGrade(newGrade);
@@ -396,7 +470,7 @@ public class App {
 
 
     //EFFECTS:prompts the user to select a class to operate in,
-            // then prints the students registered in that ranked from highest to lowest GPA
+    // then prints the students registered in that ranked from highest to lowest GPA
     public void printStudentsByOrder() {
         System.out.println("Please select a grade: ");
         showOptions();

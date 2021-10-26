@@ -37,18 +37,24 @@ public class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderGeneralGradeLevel() {
-        JsonReader reader = new JsonReader("./data/testGrade.json");
+        JsonReader reader = new JsonReader("./data/testReaderGrade.json");
         try {
             GradeLevel grade = reader.read();
             ArrayList<Student> students = grade.getStudents();
             assertEquals("test grade", grade.getName());
-            assertEquals(3, students.size());
+            assertEquals(2, students.size());
             checkStudent("Student 1",1, students.get(0));
             checkStudent("Student 2",2, students.get(1));
+
+            //first student subjects
             checkSubject("Mathematics",5,students.get(0).getGradeRecord().get(0));
-            checkSubject("Biology",3,students.get(0).getGradeRecord().get(1));
-            checkSubject("Mathematics",5,students.get(1).getGradeRecord().get(0));
-            checkSubject("Physics",5,students.get(1).getGradeRecord().get(2));
+            assertEquals(8.8,students.get(0).getGradeRecord().get(0).getFirstMidtermGrade());
+            checkSubject("English",3,students.get(0).getGradeRecord().get(4));
+
+            //second student subjects
+            checkSubject("English",3,students.get(1).getGradeRecord().get(4));
+            assertEquals(16.9,students.get(1).getGradeRecord().get(4).getFinalExamGrade());
+            checkSubject("Physical Education",1,students.get(1).getGradeRecord().get(6));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
