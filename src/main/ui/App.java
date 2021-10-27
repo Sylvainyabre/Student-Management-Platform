@@ -137,7 +137,7 @@ public class App {
         classes.add(gradeTwelve);
     }
 
-    //EEFECTS: load classes from file if users inputs y, otherwise creates new classes to work with
+    //EFFECTS: load classes from file if users inputs y, otherwise creates new classes to work with
     public void setClasses(String loadingChoice) throws IOException {
 
         if (loadingChoice.equalsIgnoreCase("y")) {
@@ -157,7 +157,7 @@ public class App {
         gradeTwelve = new GradeLevel("Grade 12");
     }
 
-    //EEFECTS: reads gradeLevels from file
+    //EFFECTS: reads gradeLevels from file
     public void getGradeLevelsFromFile() throws IOException {
         grade7Reader = new JsonReader("./data/grade7.json");
         grade8Reader = new JsonReader("./data/grade8.json");
