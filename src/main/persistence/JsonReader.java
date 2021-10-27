@@ -47,13 +47,6 @@ public class JsonReader {
         return gradeLevel;
     }
 
-//    //EFFECTS: parses students from a JSONArray and adds them to student
-//   private void parseStudents(JSONArray jsonArray){
-//        ArrayList<Student> students = new ArrayList<>();
-//        for(Object object:jsonArray){
-//            students.add(parseStudent(object));
-//        }
-//   }
 
     // MODIFIES: grade
     // EFFECTS: parses students from JSON object and adds them to grade

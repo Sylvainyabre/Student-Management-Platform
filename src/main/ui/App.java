@@ -68,9 +68,14 @@ public class App {
             actionCommand = actionCommand.toLowerCase();
 
             if (actionCommand.equals("q")) {
-                System.out.println("Saving application state to file ...");
-                writeClasses();
-                System.out.println("Quitting...");
+                System.out.println("Enter y to save the current state to file or 'n' to quit without saving ");
+                String canSave = userRequest.next();
+                if (canSave.toLowerCase().equals("y")) {
+                    writeClasses();
+                    System.out.println("State saved successfully !");
+                } else {
+                    System.out.println("Quitting without saving state to file...");
+                }
                 isRunning = false;
 
             } else {
@@ -116,6 +121,44 @@ public class App {
     //EFFECTS: creates grade 7,8,9,10,11,12,and adds them to the list of classes,
     // allow user input, throws IOException if reading fails
     public void setup() throws IOException {
+
+        userRequest = new Scanner(System.in);
+        userRequest.useDelimiter("\n");
+        System.out.println("Do you want to load your classes from file?");
+        System.out.println("Enter 'y' to load classes or 'n' to start with new classrooms");
+        String loadChoice = userRequest.next();
+        setClasses(loadChoice);
+
+        classes.add(gradeSeven);
+        classes.add(gradeEight);
+        classes.add(gradeNine);
+        classes.add(gradeTen);
+        classes.add(gradeEleven);
+        classes.add(gradeTwelve);
+    }
+
+    //EEFECTS: load classes from file if users inputs y, otherwise creates new classes to work with
+    public void setClasses(String loadingChoice) throws IOException {
+
+        if (loadingChoice.equalsIgnoreCase("y")) {
+            getGradeLevelsFromFile();
+        } else {
+            createNewClasses();
+        }
+    }
+
+    //EFFECTS: sets the value of each gradeLevel to a new instance
+    public void createNewClasses() {
+        gradeSeven = new GradeLevel("Grade 7");
+        gradeEight = new GradeLevel("Grade 8");
+        gradeNine = new GradeLevel("Grade 9");
+        gradeTen = new GradeLevel("Grade 10");
+        gradeEleven = new GradeLevel("Grade 11");
+        gradeTwelve = new GradeLevel("Grade 12");
+    }
+
+    //EEFECTS: reads gradeLevels from file
+    public void getGradeLevelsFromFile() throws IOException {
         grade7Reader = new JsonReader("./data/grade7.json");
         grade8Reader = new JsonReader("./data/grade8.json");
         grade9Reader = new JsonReader("./data/grade9.json");
@@ -129,18 +172,9 @@ public class App {
         gradeTen = grade10Reader.read();
         gradeEleven = grade11Reader.read();
         gradeTwelve = grade12Reader.read();
-        userRequest = new Scanner(System.in);
-        userRequest.useDelimiter("\n");
-
-        classes.add(gradeSeven);
-        classes.add(gradeEight);
-        classes.add(gradeNine);
-        classes.add(gradeTen);
-        classes.add(gradeEleven);
-        classes.add(gradeTwelve);
     }
 
-    //EFFECT:load gradeLevels from file
+    //EFFECT:Writes gradeLevels to file
     private void writeClasses() {
         grade7Writer = new JsonWriter("./data/grade7.json");
         grade8Writer = new JsonWriter("./data/grade8.json");
