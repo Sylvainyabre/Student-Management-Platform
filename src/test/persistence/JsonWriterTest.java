@@ -1,13 +1,12 @@
-package model;
+package persistence;
 
 
+import model.GradeLevel;
+import model.Student;
 import org.junit.jupiter.api.Test;
-import persistence.JsonReader;
-import persistence.JsonWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +18,7 @@ public class JsonWriterTest extends JsonTest {
             GradeLevel grade = new GradeLevel("Test Grade");
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
+            writer.write(grade);
             fail("IOException was expected");
         } catch (IOException e) {
             // pass

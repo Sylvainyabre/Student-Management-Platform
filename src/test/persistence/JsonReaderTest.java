@@ -1,11 +1,14 @@
-package model;
+package persistence;
 
+import model.GradeLevel;
+import model.Student;
 import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
+import persistence.JsonTest;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonReaderTest extends JsonTest {
