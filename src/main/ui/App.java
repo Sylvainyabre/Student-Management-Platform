@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// represents an application that manages 6 school classes
+//represents an application that manages 6 school classes
 public class App {
     private GradeLevel gradeSeven;
     private GradeLevel gradeEight;
