@@ -15,7 +15,7 @@ public class Popup {
     private String message;
     private String title;
     private JFrame frame;
-    int response;
+    private int response;
 
     private GradeLevel gradeSeven;
     private GradeLevel gradeEight;
