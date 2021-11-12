@@ -3,7 +3,6 @@ package ui;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 //import java.awt.Dimension;
@@ -12,8 +11,6 @@ import java.util.HashMap;
 //import java.awt.Graphics;
 //import java.util.ArrayList;
 import javax.swing.*;
-
-import persistence.*;
 
 import model.*;
 
@@ -38,18 +35,11 @@ public class MainFrame extends JFrame implements WindowListener {
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(5, 4, 5, 4, Color.CYAN));
         addWindowListener(this);
         new TopPanel(this);
-        new CentralPanel(this);
+        new SidePanel(this);
 
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
-    private void setUp(JFrame frame) {
-        Container mainContainer = frame.getContentPane();
-        JButton registrationButton = new JButton("Register a student");
-        JButton deleteButton = new JButton("remove a  student");
-    }
 
     //EFFECTS:
     //MODIFIES:
@@ -159,5 +149,12 @@ public class MainFrame extends JFrame implements WindowListener {
     @Override
     public void windowDeactivated(WindowEvent e) {
 
+    }
+
+
+    //EFFECTS:
+    //MODIFIES:
+    public HashMap<Integer, GradeLevel> getClasses() {
+        return classes;
     }
 }
