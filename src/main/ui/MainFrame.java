@@ -35,8 +35,9 @@ public class MainFrame extends JFrame implements WindowListener {
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(5, 4, 5, 4, Color.CYAN));
         addWindowListener(this);
         new TopPanel(this);
+        //new CentralPanel(this);
+        new RegistrationForm(this);
         new SidePanel(this);
-
 
     }
 
@@ -60,7 +61,7 @@ public class MainFrame extends JFrame implements WindowListener {
         Popup popup = new Popup("Do you want to load classes from file?", "Data Load", this);
         if (popup.getResponse() == 0) {
             executeDataLoading(popup);
-            JOptionPane.showMessageDialog(this, "Saved classes loaded successfully");
+            JOptionPane.showMessageDialog(this,"Saved classes loaded successfully");
         } else {
             setNewClasses(popup);
             JOptionPane.showMessageDialog(this, "Application running with new empty classes");

@@ -25,8 +25,9 @@ public class SidePanel extends JPanel implements ActionListener {
     public SidePanel(MainFrame frame) {
         Container container = frame.getContentPane();
         this.frame = frame;
+        container.setLayout(new BorderLayout(8,6));
         container.add(this, BorderLayout.WEST);
-        this.setLayout(new FlowLayout(4, 4, 4));
+       // this.setLayout(new BorderLayout());
         this.setBorder(new LineBorder(Color.LIGHT_GRAY, 3));
         this.setBackground(Color.WHITE);
         addLeftPanel();
@@ -39,13 +40,12 @@ public class SidePanel extends JPanel implements ActionListener {
         JPanel leftGridPanel = new JPanel();
         firstNameLabel = new JLabel("First Name: ");
         firstNameField = new JTextField();
-        firstNameField.setBounds(80, 80, 130, 20);
         lastNameLabel = new JLabel("Last Name: ");
         lastNameField = new JTextField();
         comboBox = new JComboBox<>(gradeStrings);
         registrationButton = new JButton("Register");
         addActionListenerToButtons();
-        leftGridPanel.setLayout(new GridLayout(SwingConstants.WEST, 3, 5, 5));
+        leftGridPanel.setLayout(new GridLayout(4, 4, 10, 5));
         leftGridPanel.setBorder(new LineBorder(Color.CYAN, 4));
         leftGridPanel.setBackground(new Color(172, 190, 191));
         leftGridPanel.add(firstNameLabel);
@@ -79,6 +79,8 @@ public class SidePanel extends JPanel implements ActionListener {
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 handleRegistration(gradeLevel, firstName, lastName);
+                firstNameField.setText("");
+                lastNameField.setText("");
 
 
             } catch (RuntimeException ex) {
