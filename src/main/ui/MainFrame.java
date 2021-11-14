@@ -1,18 +1,13 @@
 package ui;
 
+import model.GradeLevel;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.HashMap;
-//import java.awt.Dimension;
-//import java.awt.Font;
-//import java.awt.FontMetrics;
-//import java.awt.Graphics;
-//import java.util.ArrayList;
-import javax.swing.*;
-
-import model.*;
 
 public class MainFrame extends JFrame implements WindowListener {
     private GradeLevel grade7;
@@ -25,7 +20,8 @@ public class MainFrame extends JFrame implements WindowListener {
 
 
     public MainFrame() {
-        this.setVisible(true);
+
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize((int) screenSize.getWidth(), (int) screenSize.getHeight());
         this.setTitle("STUDENT MANAGEMENT SYSTEM");
@@ -36,8 +32,12 @@ public class MainFrame extends JFrame implements WindowListener {
         addWindowListener(this);
         new TopPanel(this);
         //new CentralPanel(this);
-        new RegistrationForm(this);
-        new SidePanel(this);
+        //new RegistrationForm(this);
+
+        this.setVisible(true);
+        //this.pack();
+
+
 
     }
 
@@ -48,10 +48,10 @@ public class MainFrame extends JFrame implements WindowListener {
         Popup popup = new Popup("Do you want your save your classes to file?", "Data Saving", this);
         if (popup.getResponse() == 0) {
             popup.writeClasses(this.classes);
-            System.exit(0);
-        } else {
-            System.exit(0);
+
         }
+        System.exit(0);
+
 
     }
 
@@ -61,7 +61,7 @@ public class MainFrame extends JFrame implements WindowListener {
         Popup popup = new Popup("Do you want to load classes from file?", "Data Load", this);
         if (popup.getResponse() == 0) {
             executeDataLoading(popup);
-            JOptionPane.showMessageDialog(this,"Saved classes loaded successfully");
+            JOptionPane.showMessageDialog(this, "Saved classes loaded successfully");
         } else {
             setNewClasses(popup);
             JOptionPane.showMessageDialog(this, "Application running with new empty classes");
@@ -103,10 +103,26 @@ public class MainFrame extends JFrame implements WindowListener {
 
     //EFFECTS:
     //MODIFIES:
+    public GradeLevel findClassByName(String name) {
+        GradeLevel gradeLevel = null;
+        for (GradeLevel grade : this.classes.values()) {
+            if (grade.getName().equalsIgnoreCase(name)) {
+                gradeLevel = grade;
+            }
+        }
+        return gradeLevel;
+    }
+
+    //EFFECTS:
+    //MODIFIES:
     @Override
     public void windowOpened(WindowEvent e) {
         handleDataLoading();
-        System.out.println(this.classes.size());
+        new SidePanel(this);
+        this.repaint();
+        this.revalidate();
+
+
     }
 
     //EFFECTS:

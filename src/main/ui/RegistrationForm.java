@@ -5,10 +5,9 @@ import model.Student;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RegistrationForm implements ActionListener {
+public class RegistrationForm  {
     private String[] gradeStrings = {"grade 7", "grade 8", "grade 9", "grade 10", "grade 11", "grade 12"};
     private MainFrame frame;
     private JButton registrationButton;
@@ -34,16 +33,19 @@ public class RegistrationForm implements ActionListener {
         panel.add(firstNameField);
         panel.add(lastNameLabel);
         panel.add(lastNameField);
+        panel.add(registrationButton);
 
-        int result = JOptionPane.showConfirmDialog(null, panel,
+        int result = JOptionPane.showConfirmDialog(frame, panel,
                 "Registration", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        register(result);
+
     }
 
     //EFFECT:
     //MODIFIES:
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(registrationButton)) {
+
+    public void register(int choice) {
+        if (choice == JOptionPane.OK_OPTION) {
             int gradeLevelSelection = comboBox.getSelectedIndex();
 
             gradeLevel = frame.getClasses().get(gradeLevelSelection + 7);
@@ -78,7 +80,11 @@ public class RegistrationForm implements ActionListener {
         } else {
             Student newStudent = new Student(firstName, lastName);
             gradeLevel.registerStudent(newStudent);
+            frame.repaint();
+            frame.revalidate();
             JOptionPane.showMessageDialog(frame, "Student registered successfully");
         }
     }
+
+
 }

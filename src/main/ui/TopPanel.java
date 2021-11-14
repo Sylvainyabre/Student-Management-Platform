@@ -9,12 +9,11 @@ public class TopPanel extends JPanel {
     private JButton deleteButton;
     private JButton transcriptButton;
 
-    public TopPanel(JFrame frame) {
+    public TopPanel(MainFrame frame) {
         this.setBorder(new LineBorder(Color.PINK, 3));
         this.setBackground(new Color(228, 231, 237));
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        Container container = frame.getContentPane();
-        container.add(this, BorderLayout.NORTH);
+
 
         registrationButton = new JButton("Register  student");
         deleteButton = new JButton("Remove student");
@@ -25,8 +24,11 @@ public class TopPanel extends JPanel {
                 + "</div></html>");
         topLabel.setFont(new Font("Serif", Font.BOLD, 40));
         topLabel.setForeground(new Color(50, 123, 168));
-        topLabel.setOpaque(true);
+        //topLabel.setOpaque(true);
         this.add(topLabel);
+        Container container = frame.getContentPane();
+        container.add(this, BorderLayout.NORTH);
+
     }
 
     //EFFECT:
