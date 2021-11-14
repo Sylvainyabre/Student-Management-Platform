@@ -23,6 +23,8 @@ public class SidePanel extends JPanel implements ActionListener {
     private GradeLevel gradeLevel;
     private JButton studentsButton;
     private StudentsDisplay studentsDisplay;
+    HashMap<Integer, GradeLevel> classes;
+    int gradeLevelSelection;
 
     //EFFECT:
     //MODIFIES
@@ -32,9 +34,6 @@ public class SidePanel extends JPanel implements ActionListener {
         this.setBackground(Color.WHITE);
         addLeftPanel();
         frame.add(this, BorderLayout.WEST);
-
-
-
 
 
     }
@@ -57,9 +56,7 @@ public class SidePanel extends JPanel implements ActionListener {
         comboBox = new JComboBox<>(gradeStrings);
         registrationButton = new JButton("Register");
         studentsButton = new JButton("Display Students");
-        int gradeLevelSelection = comboBox.getSelectedIndex();
-        HashMap<Integer,GradeLevel> classes = frame.getClasses();
-        gradeLevel = classes.get(gradeLevelSelection + 7);
+        updateSelection();
     }
 
     private void addComponents() {
@@ -88,11 +85,12 @@ public class SidePanel extends JPanel implements ActionListener {
         comboBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.DESELECTED) {
 
-
+                updateSelection();
                 frame.remove(studentsDisplay);
-                studentsDisplay = new StudentsDisplay(frame,gradeLevel);
+                studentsDisplay = new StudentsDisplay(frame, gradeLevel);
                 frame.revalidate();
-                frame.repaint();;
+                frame.repaint();
+                ;
 
             }
         });
@@ -101,12 +99,18 @@ public class SidePanel extends JPanel implements ActionListener {
 
     //EFFECT:
     //MODIFIES:
+    private void updateSelection() {
+        gradeLevelSelection = comboBox.getSelectedIndex();
+        classes = frame.getClasses();
+        gradeLevel = classes.get(gradeLevelSelection + 7);
+    }
+
+    //EFFECT:
+    //MODIFIES:
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource().equals(registrationButton)) {
-
-
+            updateSelection();
             try {
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
@@ -114,17 +118,13 @@ public class SidePanel extends JPanel implements ActionListener {
                 firstNameField.setText("");
                 lastNameField.setText("");
 
-
             } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(frame, ex.getMessage());
             }
         }
         if (e.getSource().equals(studentsButton)) {
             try {
-                frame.remove(studentsDisplay);
-                studentsDisplay = new StudentsDisplay(frame, gradeLevel);
-                frame.revalidate();
-                frame.repaint();
+                handleStudentDisplay();
 
             } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(frame, ex.getMessage());
@@ -136,6 +136,15 @@ public class SidePanel extends JPanel implements ActionListener {
     //EFFECT:
     //MODIFIES:
     //REQUIRES:
+    private void handleStudentDisplay() {
+        updateSelection();
+
+        frame.remove(studentsDisplay);
+        studentsDisplay = new StudentsDisplay(frame, gradeLevel);
+        frame.revalidate();
+        frame.repaint();
+    }
+
     //MODIFIES:
     //EFFECTS:
     private void handleRegistration(GradeLevel gradeLevel, String firstName, String lastName) {
@@ -149,7 +158,7 @@ public class SidePanel extends JPanel implements ActionListener {
             Student newStudent = new Student(firstName, lastName);
             gradeLevel.registerStudent(newStudent);
             frame.remove(studentsDisplay);
-            studentsDisplay = new StudentsDisplay(frame,gradeLevel);
+            studentsDisplay = new StudentsDisplay(frame, gradeLevel);
             frame.revalidate();
             frame.repaint();
             JOptionPane.showMessageDialog(frame, "Student registered successfully");

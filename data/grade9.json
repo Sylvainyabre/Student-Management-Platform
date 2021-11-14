@@ -1,4 +1,80 @@
 {
     "name": "Grade 9",
-    "students": []
+    "students": [{
+        "last": "Yabre",
+        "gradeRecord": [
+            {
+                "firstMidtermGrade": 0,
+                "name": "Mathematics",
+                "weight": 5,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "Biology",
+                "weight": 3,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "Physics",
+                "weight": 5,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "Chemistry",
+                "weight": 5,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "English",
+                "weight": 3,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "French",
+                "weight": 3,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "Physical Education",
+                "weight": 1,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "Geography",
+                "weight": 1,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "History",
+                "weight": 1,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            },
+            {
+                "firstMidtermGrade": 0,
+                "name": "Philosophy",
+                "weight": 2,
+                "secondMidtermGrade": 0,
+                "finalExamGrade": 0
+            }
+        ],
+        "id": 1,
+        "first": "Emar"
+    }]
 }
