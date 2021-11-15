@@ -7,8 +7,9 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 //Code here has been inspired by this tutorial: https://www.javatpoint.com/java-jtable
@@ -21,20 +22,20 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
     private GradeLevel selectedGradeLevel;
     private JTable table;
     private ListSelectionModel selectionModel;
-    private int[] selectedRow;
+    private int selectedRow;
 
     public StudentsDisplay(MainFrame frame, GradeLevel gradeLevel) {
         this.frame = frame;
         this.selectedGradeLevel = gradeLevel;
         classes = frame.getClasses();
-
         table = new JTable(data, columns);
 
         table.setCellSelectionEnabled(true);
+        table.addMouseListener(tableMouseListener);
         selectionModel = table.getSelectionModel();
         selectionModel.addListSelectionListener(this);
         setup();
-        selectedRow = table.getSelectedRows();
+        selectedRow = table.getSelectedRow();
         setTableData();
 
 
@@ -53,7 +54,8 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
 
         this.setBorder(BorderFactory.createEmptyBorder(50, 5, 5, 5));
         this.setBounds(400, 300, 100, 100);
-        this.setBackground(new Color(50, 123, 168));;
+        this.setBackground(new Color(50, 123, 168));
+        ;
 
         this.add(pane);
 
@@ -87,6 +89,39 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
 
         //Student student =  selectedGradeLevel.findStudentById((int)selectedRow[1]);
-        System.out.println(Arrays.toString(selectedRow));
+        //tableModel.getDataVector().elementAt(jTable.getSelectedRow());
+        //System.out.println(selectedRow);
     }
+
+    MouseListener tableMouseListener = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int row = table.rowAtPoint(e.getPoint());
+            Object id =  table.getValueAt(row,0);
+            System.out.println(id);
+//            Student selectedStudent = selectedGradeLevel.findStudentById(id);
+//            System.out.println(selectedStudent.getFullName());
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
 }
