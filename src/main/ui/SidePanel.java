@@ -224,11 +224,11 @@ public class SidePanel extends JPanel implements ActionListener {
         int studentId = -1;
         if (idField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Please, enter a valid ID !");
-        }
-        if (!(Integer.parseInt(idField.getText()) > 0)) {
-            JOptionPane.showMessageDialog(frame, "Please, enter a valid ID !");
         } else {
             try {
+                if (!(Integer.parseInt(idField.getText()) > 0)) {
+                    JOptionPane.showMessageDialog(frame, "Please, enter a valid ID !");
+                }
                 studentId = Integer.parseInt(idField.getText());
                 secondComboBoxSelection = secondComboBox.getSelectedIndex();
                 secondComboBoxSelectedGrade = classes.get(secondComboBoxSelection + 7);
