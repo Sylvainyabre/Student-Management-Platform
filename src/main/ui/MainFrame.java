@@ -21,9 +21,8 @@ public class MainFrame extends JFrame implements WindowListener {
 
     public MainFrame() {
 
-
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setSize((int) screenSize.getWidth(), (int) screenSize.getHeight());
+        this.setSize((int) screenSize.getWidth(), (int)screenSize.getHeight());
         this.setTitle("STUDENT MANAGEMENT SYSTEM");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setBackground(new Color(50, 123, 168));
@@ -31,11 +30,7 @@ public class MainFrame extends JFrame implements WindowListener {
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(5, 4, 5, 4, Color.CYAN));
         addWindowListener(this);
         new TopPanel(this);
-        //new CentralPanel(this);
-        //new RegistrationForm(this);
-
         this.setVisible(true);
-        //this.pack();
 
 
 

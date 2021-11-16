@@ -39,7 +39,6 @@ public class StudentTranscript {
     }
 
     private void setTranscriptData(Student student) {
-        System.out.println(student.getFullName());
         ArrayList<Subject> gradeRecord = student.getGradeRecord();
 
         for (Subject subject : gradeRecord) {
