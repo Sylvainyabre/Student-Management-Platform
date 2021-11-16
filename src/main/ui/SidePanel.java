@@ -2,6 +2,7 @@ package ui;
 
 import model.GradeLevel;
 import model.Student;
+import model.Subject;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -33,6 +34,12 @@ public class SidePanel extends JPanel implements ActionListener {
     private int secondComboBoxSelection;
     private GradeLevel secondComboBoxSelectedGrade;
     private int response;
+    private JPanel updatePanel = new JPanel();
+    private String[] subjectNames = {"Mathematics", "Biology", "Physics", "Chemistry",
+            "English", "French", "Physical Education",
+            "Geography", "History", "Philosophy"};
+    private JComboBox<String> subjectCombo;
+    private JComboBox<String> examChoiceCombo;
 
     //EFFECT:
     //MODIFIES
@@ -70,6 +77,8 @@ public class SidePanel extends JPanel implements ActionListener {
         studentsButton = new JButton("Display Students");
         transcriptButton = new JButton("Show Transcript");
         deleteButton = new JButton("Delete Student");
+        subjectCombo = new JComboBox<>(subjectNames);
+        examChoiceCombo = new JComboBox<>(new String[]{"Midterm 1", "Midterm 2", "Final Exam"});
         updateSelection();
     }
 
@@ -170,6 +179,84 @@ public class SidePanel extends JPanel implements ActionListener {
 
             handleStudentDelete();
         }
+        if (e.getSource().equals(updateButton)) {
+            updateStudentGrade();
+        }
+    }
+
+    //EFFECT:
+    //MODIFIES:
+    //REQUIRES:
+    private void updateStudentGrade() {
+
+        updatePanel.setLayout(new GridLayout(4, 0));
+        JLabel gradeLabel = new JLabel("Exam Grade");
+        JTextField gradeField = new JTextField();
+
+        updatePanel.add(subjectCombo);
+        updatePanel.add(examChoiceCombo);
+        updatePanel.add(gradeLabel);
+        updatePanel.add(gradeField);
+        validateUpdate(gradeField.getText());
+
+    }
+
+    private void validateUpdate(String gradeString) {
+        try {
+            int studentId;
+            studentId = Integer.parseInt(idField.getText());
+            double newGrade = Double.parseDouble(gradeString);
+            if (idField.getText().isEmpty() || !(Integer.parseInt(idField.getText()) > 0)) {
+                JOptionPane.showMessageDialog(frame, "Please, enter a valid ID !");
+            }
+            if (newGrade < 0) {
+                JOptionPane.showMessageDialog(frame, "Invalid Grade Entered!");
+            }
+            if (secondComboBoxSelectedGrade == null) {
+                JOptionPane.showMessageDialog(frame, "Wrong grade name !");
+            }
+            Student student = secondComboBoxSelectedGrade.findStudentById(studentId);
+            if (student == null) {
+                JOptionPane.showMessageDialog(frame, "No student found with this ID");
+            } else {
+                executeUpdate(student, newGrade);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(frame, "Please, enter a valid ID !");
+
+        }
+    }
+
+    private void executeUpdate(Student student, double newGrade) {
+        String subjectName = (String) subjectCombo.getSelectedItem();
+        Subject chosenSubject = findSubjectByName(student, subjectName);
+        if (chosenSubject == null) {
+            JOptionPane.showMessageDialog(frame, "No subject found with this name !");
+        }
+        Object[] options = {"Yes", "No"};
+        int updateResponse = JOptionPane.showOptionDialog(updatePanel,
+                "Please choose and subject, a exam to update grade.",
+                "Student grade update",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,     //do not use a custom Icon
+                options,  //the titles of buttons
+                options[0]); //default button title
+        if (updateResponse == 0) {
+            student.updateSubjectGrade(subjectName, newGrade, examChoiceCombo.getSelectedIndex());
+
+        }
+    }
+
+    private Subject findSubjectByName(Student student, String subjectName) {
+        Subject chosenSubject = null;
+        for (Subject sub : student.getGradeRecord()) {
+            if (sub.getName().equalsIgnoreCase(subjectName)) {
+                chosenSubject = sub;
+            }
+        }
+        return chosenSubject;
     }
 
     //EFFECT:
