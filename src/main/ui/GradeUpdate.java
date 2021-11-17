@@ -70,13 +70,14 @@ public class GradeUpdate extends JPanel implements ActionListener {
             double enteredGrade = Double.parseDouble(gradeBuffer);
             String idBuffer = idField.getText();
             if (enteredGrade > 20 || enteredGrade < 0) {
-                JOptionPane.showMessageDialog(frame, "Grade should be in range [0,20]");
+                JOptionPane.showMessageDialog(frame, "Grade should be in range [0,20]!");
             } else {
                 int studentId = Integer.parseInt(idBuffer);
                 int gradeIndex = gradeChoiceCombo.getSelectedIndex();
                 subjectName = (String) subjectCombo.getSelectedItem();
                 selectedGrade = frame.getClasses().get(gradeIndex + 7);
                 executeUpdate(enteredGrade, studentId, gradeIndex + 1);
+                // index starts at 0, so add 1 to have indexes [1,2,3]
             }
 
 
