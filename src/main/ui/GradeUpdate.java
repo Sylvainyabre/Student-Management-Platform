@@ -21,7 +21,6 @@ public class GradeUpdate extends JPanel implements ActionListener {
     private JTextField idField;
     private JTextField gradeField;
     private String subjectName;
-    private String gradeString;
     private JLabel idLabel;
     private JLabel gradeLabel;
     private GradeLevel selectedGrade;
@@ -60,7 +59,6 @@ public class GradeUpdate extends JPanel implements ActionListener {
         idLabel = new JLabel("Student ID:");
         gradeLabel = new JLabel("New Grade:");
         subjectName = null;
-        gradeString = null;
     }
 
     //MODIFIES:
@@ -70,14 +68,16 @@ public class GradeUpdate extends JPanel implements ActionListener {
         try {
             String gradeBuffer = gradeField.getText();
             double enteredGrade = Double.parseDouble(gradeBuffer);
-            validateGradeField(enteredGrade);
             String idBuffer = idField.getText();
-            validateStringInput(gradeBuffer, idBuffer);
-            int studentId = Integer.parseInt(idBuffer);
-            int gradeIndex = gradeChoiceCombo.getSelectedIndex();
-            subjectName = (String) subjectCombo.getSelectedItem();
-            selectedGrade = frame.getClasses().get(gradeIndex + 7);
-            executeUpdate(enteredGrade, studentId, gradeIndex);
+            if (enteredGrade > 20 || enteredGrade < 0) {
+                JOptionPane.showMessageDialog(frame, "Grade should be in range [0,20]");
+            } else {
+                int studentId = Integer.parseInt(idBuffer);
+                int gradeIndex = gradeChoiceCombo.getSelectedIndex();
+                subjectName = (String) subjectCombo.getSelectedItem();
+                selectedGrade = frame.getClasses().get(gradeIndex + 7);
+                executeUpdate(enteredGrade, studentId, gradeIndex + 1);
+            }
 
 
         } catch (NumberFormatException e) {
@@ -105,25 +105,8 @@ public class GradeUpdate extends JPanel implements ActionListener {
         }
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
-    private void validateStringInput(String studentId, String newGrade) {
-        if (studentId.isEmpty() || newGrade.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "All fields are required !");
-        }
-    }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
-    private void validateGradeField(double enteredGrade) {
-        if ((enteredGrade < 0 || enteredGrade > 20)) {
-            JOptionPane.showMessageDialog(frame, "Grade should be in range [0,20]");
 
-        }
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

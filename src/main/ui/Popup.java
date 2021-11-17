@@ -5,8 +5,8 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
@@ -42,13 +42,17 @@ public class Popup {
         this.message = message;
         this.title = title;
         this.frame = frame;
+        ImageIcon icon = new ImageIcon("./data/school.png");
+        Image image = icon.getImage();
+        Image resizedImage = getScaledImage(image,120,120);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
         Object[] options = {"Yes", "No"};
         response = JOptionPane.showOptionDialog(frame,
                 message,
                 title,
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                null,     //do not use a custom Icon
+                resizedIcon,     // use a custom Icon
                 options,  //the titles of buttons
                 options[0]); //default button title
 
@@ -62,8 +66,8 @@ public class Popup {
     }
 
     //EFFECTS: reads gradeLevels from file
-    public HashMap<Integer,GradeLevel> getGradeLevelsFromFile() throws IOException {
-        HashMap<Integer,GradeLevel> classes = new HashMap<>();
+    public HashMap<Integer, GradeLevel> getGradeLevelsFromFile() throws IOException {
+        HashMap<Integer, GradeLevel> classes = new HashMap<>();
         grade7Reader = new JsonReader("./data/grade7.json");
         grade8Reader = new JsonReader("./data/grade8.json");
         grade9Reader = new JsonReader("./data/grade9.json");
@@ -77,18 +81,18 @@ public class Popup {
         gradeTen = grade10Reader.read();
         gradeEleven = grade11Reader.read();
         gradeTwelve = grade12Reader.read();
-        classes.put(7,gradeSeven);
-        classes.put(8,gradeEight);
-        classes.put(9,gradeNine);
-        classes.put(10,gradeTen);
-        classes.put(11,gradeEleven);
-        classes.put(12,gradeTwelve);
+        classes.put(7, gradeSeven);
+        classes.put(8, gradeEight);
+        classes.put(9, gradeNine);
+        classes.put(10, gradeTen);
+        classes.put(11, gradeEleven);
+        classes.put(12, gradeTwelve);
 
         return classes;
 
     }
 
-    public void writeClasses(HashMap<Integer,GradeLevel> classes) {
+    public void writeClasses(HashMap<Integer, GradeLevel> classes) {
         grade7Writer = new JsonWriter("./data/grade7.json");
         grade8Writer = new JsonWriter("./data/grade8.json");
         grade9Writer = new JsonWriter("./data/grade9.json");
@@ -134,8 +138,8 @@ public class Popup {
     }
 
     //EFFECTS: sets the value of each gradeLevel to a new instance
-    public HashMap<Integer,GradeLevel> createNewClasses() {
-        HashMap<Integer,GradeLevel> classes = new HashMap<>();
+    public HashMap<Integer, GradeLevel> createNewClasses() {
+        HashMap<Integer, GradeLevel> classes = new HashMap<>();
         gradeSeven = new GradeLevel("Grade 7");
         gradeEight = new GradeLevel("Grade 8");
         gradeNine = new GradeLevel("Grade 9");
@@ -153,4 +157,18 @@ public class Popup {
 
     }
 
+    //MODIFIES:
+    //REQUIRES:
+    //EFFECTS:
+    //code credit:https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
+    private Image getScaledImage(Image srcImg, int w, int h) {
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        return resizedImg;
+    }
 }
