@@ -79,6 +79,7 @@ public class SidePanel extends JPanel implements ActionListener {
         deleteButton = new JButton("Delete Student");
         subjectCombo = new JComboBox<>(subjectNames);
         examChoiceCombo = new JComboBox<>(new String[]{"Midterm 1", "Midterm 2", "Final Exam"});
+        updateButton = new JButton("Update Student Grade");
         updateSelection();
     }
 
@@ -108,11 +109,9 @@ public class SidePanel extends JPanel implements ActionListener {
     //REQUIRES:
     private void addSecondPanel() {
         JPanel secondPanel = new JPanel();
-
         JLabel idLabel = new JLabel("Student ID");
         idField = new JTextField();
         secondComboBoxSelection = secondComboBox.getSelectedIndex();
-        updateButton = new JButton("Update Student Grade");
         secondPanel.setLayout(new GridLayout(4, 4, 10, 5));
         secondPanel.setBorder(new LineBorder(Color.CYAN, 4));
         secondPanel.setBackground(new Color(172, 190, 191));
@@ -122,6 +121,7 @@ public class SidePanel extends JPanel implements ActionListener {
         secondPanel.add(deleteButton);
         secondPanel.add(transcriptButton);
         secondPanel.add(updateButton);
+        new GradeUpdate(frame,this);
         this.add(secondPanel);
 
     }
@@ -135,6 +135,7 @@ public class SidePanel extends JPanel implements ActionListener {
         studentsButton.addActionListener(this);
         transcriptButton.addActionListener(this);
         deleteButton.addActionListener(this);
+        updateButton.addActionListener(this);
         comboBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.DESELECTED) {
 
@@ -197,6 +198,7 @@ public class SidePanel extends JPanel implements ActionListener {
         updatePanel.add(examChoiceCombo);
         updatePanel.add(gradeLabel);
         updatePanel.add(gradeField);
+        frame.add(updatePanel);
         validateUpdate(gradeField.getText());
 
     }
@@ -216,6 +218,7 @@ public class SidePanel extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "Wrong grade name !");
             }
             Student student = secondComboBoxSelectedGrade.findStudentById(studentId);
+            System.out.println(student);
             if (student == null) {
                 JOptionPane.showMessageDialog(frame, "No student found with this ID");
             } else {
@@ -235,7 +238,7 @@ public class SidePanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(frame, "No subject found with this name !");
         }
         Object[] options = {"Yes", "No"};
-        int updateResponse = JOptionPane.showOptionDialog(updatePanel,
+        int updateResponse = JOptionPane.showOptionDialog(frame,
                 "Please choose and subject, a exam to update grade.",
                 "Student grade update",
                 JOptionPane.YES_NO_OPTION,
