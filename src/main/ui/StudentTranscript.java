@@ -32,7 +32,7 @@ public class StudentTranscript {
 
         panel.add(new JLabel(student.getFullName()));
         panel.add(new JLabel(student.getGradeLevel().getName()));
-        panel.add(new JLabel("GPA: " + truncateGrade(student.getOverallGrade()) ));
+        panel.add(new JLabel("GPA: " + truncateGrade(student.getOverallGrade())));
 
         panel.add(pane);
         JOptionPane.showMessageDialog(frame, panel);
@@ -43,8 +43,7 @@ public class StudentTranscript {
     // EFFECTS: truncate the number into two decimal places and cast to float and returns it
     //REQUIRES: grade>0
     private float truncateGrade(double grade) {
-        float truncated = (float) (Math.floor(grade * 100) / 100);
-        return truncated;
+        return (float) (Math.floor(grade * 100) / 100);
     }
 
     //MODIFIES: this
