@@ -7,16 +7,14 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 //Code here has been inspired by this tutorial: https://www.javatpoint.com/java-jtable
+//Class representing a Student transcript display
 public class StudentsDisplay extends JPanel implements ListSelectionListener {
     private MainFrame frame;
     private String[][] data = new String[GradeLevel.MAX_CAPACITY][4];
-    //private String[] gradeStrings = {"grade 7", "grade 8", "grade 9", "grade 10", "grade 11", "grade 12"};
     private String[] columns = {"ID", "First Name", "Last Name", "GPA (/20)"};
     private HashMap<Integer, GradeLevel> classes;
     private GradeLevel selectedGradeLevel;
@@ -24,6 +22,8 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
     private ListSelectionModel selectionModel;
     private int selectedRow;
 
+
+    // Creates a new StudentDisplay and sets its properties
     public StudentsDisplay(MainFrame frame, GradeLevel gradeLevel) {
         this.frame = frame;
         this.selectedGradeLevel = gradeLevel;
@@ -31,7 +31,6 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
         table = new JTable(data, columns);
 
         table.setCellSelectionEnabled(true);
-        table.addMouseListener(tableMouseListener);
         selectionModel = table.getSelectionModel();
         selectionModel.addListSelectionListener(this);
         setup();
@@ -41,6 +40,8 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
 
     }
 
+    //MDOFIES:this
+    // EFFECTS: sets table properties and then add table to frame
     private void setup() {
         table.setFillsViewportHeight(true);
         table.setShowHorizontalLines(true);
@@ -62,8 +63,10 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
         frame.add(this, BorderLayout.EAST);
     }
 
-    //EFFECT:
-    //MODIFIES:
+
+    //MODIFIES: this
+    //EFFECT: if the selected gradeLevel is not null, get the students in the selected grade and
+    // add them to table data to be displayed
     private void setTableData() {
         if (selectedGradeLevel != null) {
             ArrayList<Student> students = selectedGradeLevel.getStudents();
@@ -76,52 +79,28 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
 
     }
 
-    //EFFECT:
-    //MODIFIES:
+    //MODIFIES:arr
+    //EFFECT:fills the row in arr corresponding to the student's id with the student's
+    // ID, firstName, lastName and GPA
     private void addStudentToArray(Student student, String[][] arr) {
+        // we subtract 1 from  id to start from 0 because id starts from 1
         arr[student.getId() - 1][0] = String.valueOf(student.getId());
         arr[student.getId() - 1][1] = student.getFirstName();
         arr[student.getId() - 1][2] = student.getLastName();
-        arr[student.getId() - 1][3] = String.valueOf(student.getOverallGrade());
+        arr[student.getId() - 1][3] = String.valueOf(truncateGrade(student.getOverallGrade()));
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
 
-        //Student student =  selectedGradeLevel.findStudentById((int)selectedRow[1]);
-        //tableModel.getDataVector().elementAt(jTable.getSelectedRow());
-        //System.out.println(selectedRow);
     }
 
-    MouseListener tableMouseListener = new MouseListener() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            int row = table.rowAtPoint(e.getPoint());
-            Object id =  table.getValueAt(row,0);
-            System.out.println(id);
-//            Student selectedStudent = selectedGradeLevel.findStudentById(id);
-//            System.out.println(selectedStudent.getFullName());
+    //MODIFIES: grade
+    // EFFECTS: truncate the number into two decimal places and cast to float and returns it
+    //REQUIRES: grade>0
+    private float truncateGrade(double grade) {
+        float truncated = (float) (Math.floor(grade * 100) / 100);
+        return truncated;
+    }
 
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    };
 }

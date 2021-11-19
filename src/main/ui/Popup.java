@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
+// A class representing a popup with a message and two choice buttons
 public class Popup {
     private String message;
     private String title;
@@ -38,13 +39,14 @@ public class Popup {
     private JsonWriter grade11Writer;
     private JsonWriter grade12Writer;
 
+    //EFFECTS: creates a new popup with a message and choice buttons
     public Popup(String message, String title, JFrame frame) {
         this.message = message;
         this.title = title;
         this.frame = frame;
         ImageIcon icon = new ImageIcon("./data/school.png");
         Image image = icon.getImage();
-        Image resizedImage = getScaledImage(image,120,120);
+        Image resizedImage = getScaledImage(image, 120, 120);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         Object[] options = {"Yes", "No"};
         response = JOptionPane.showOptionDialog(frame,
@@ -59,13 +61,12 @@ public class Popup {
 
     }
 
-    //EFFECTS: return pane
-
     public int getResponse() {
         return response;
     }
 
-    //EFFECTS: reads gradeLevels from file
+    //MODIFIES: this
+    //EFFECTS: reads gradeLevels from file and returns the data into a Map, throws IOException
     public HashMap<Integer, GradeLevel> getGradeLevelsFromFile() throws IOException {
         HashMap<Integer, GradeLevel> classes = new HashMap<>();
         grade7Reader = new JsonReader("./data/grade7.json");
@@ -92,6 +93,8 @@ public class Popup {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: opens writers, writes classes to file and then closes writers
     public void writeClasses(HashMap<Integer, GradeLevel> classes) {
         grade7Writer = new JsonWriter("./data/grade7.json");
         grade8Writer = new JsonWriter("./data/grade8.json");
@@ -137,6 +140,7 @@ public class Popup {
         grade12Writer.close();
     }
 
+    //MODIFIES:this
     //EFFECTS: sets the value of each gradeLevel to a new instance
     public HashMap<Integer, GradeLevel> createNewClasses() {
         HashMap<Integer, GradeLevel> classes = new HashMap<>();
@@ -157,9 +161,9 @@ public class Popup {
 
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
+    //MODIFIES:srcImg
+    //REQUIRES: w and h are positive integers
+    //EFFECTS: scales the image to dimensions w and h
     //code credit:https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
     private Image getScaledImage(Image srcImg, int w, int h) {
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);

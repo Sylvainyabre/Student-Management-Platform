@@ -9,6 +9,7 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.HashMap;
 
+//A class representing the main frame on which all the other components will be placed
 public class MainFrame extends JFrame implements WindowListener {
     private GradeLevel grade7;
     private GradeLevel grade8;
@@ -19,6 +20,7 @@ public class MainFrame extends JFrame implements WindowListener {
     private HashMap<Integer, GradeLevel> classes;
 
 
+    //EFFECTS: creates a new frame and adds all the child-components
     public MainFrame() {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -35,9 +37,8 @@ public class MainFrame extends JFrame implements WindowListener {
 
     }
 
-
-    //EFFECTS:
-    //MODIFIES:
+    //MODIFIES: this
+    //EFFECTS: if user selects to save application state, write classes to file, exits.
     private void handleWindowClose() {
         Popup popup = new Popup("Do you want your save your classes to file?", "Data Saving", this);
         if (popup.getResponse() == 0) {
@@ -49,8 +50,9 @@ public class MainFrame extends JFrame implements WindowListener {
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
+    //EFFECTS: prompts user to select an option
+    // if user selects yes, load data from file, else, create new classes
+    //MODIFIES:this
     private void handleDataLoading() {
         Popup popup = new Popup("Do you want to load classes from file?", "Data Load", this);
         if (popup.getResponse() == 0) {
@@ -63,8 +65,9 @@ public class MainFrame extends JFrame implements WindowListener {
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
+
+    //MODIFIES:this
+    //EFFECTS: creates new classes and assigns them to the class variables
     private void setNewClasses(Popup popup) {
         HashMap<Integer, GradeLevel> classes = popup.createNewClasses();
         grade7 = classes.get(7);
@@ -76,8 +79,8 @@ public class MainFrame extends JFrame implements WindowListener {
         this.classes = classes;
     }
 
-    //EFFECTS:
-    //MODIFIES:
+    //EFFECTS: reads data from file and assigns it to its variables
+    //MODIFIES:this
     private void executeDataLoading(Popup popup) {
         try {
             HashMap<Integer, GradeLevel> classes = popup.getGradeLevelsFromFile();
@@ -95,76 +98,57 @@ public class MainFrame extends JFrame implements WindowListener {
         }
     }
 
-    //EFFECTS:
-    //MODIFIES:
-    public GradeLevel findClassByName(String name) {
-        GradeLevel gradeLevel = null;
-        for (GradeLevel grade : this.classes.values()) {
-            if (grade.getName().equalsIgnoreCase(name)) {
-                gradeLevel = grade;
-            }
-        }
-        return gradeLevel;
-    }
 
-    //EFFECTS:
-    //MODIFIES:
+    //MODIFIES: this
+    //EFFECTS: repaints and revalidates the frame when the window is open, after adding the side pane
     @Override
     public void windowOpened(WindowEvent e) {
         handleDataLoading();
         new SidePanel(this);
-        this.repaint();
         this.revalidate();
+        this.repaint();
+
 
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
+    //MODIFIES: this
+    //EFFECTS: runs the function handleWindowClose() when the window is closing
     @Override
     public void windowClosing(WindowEvent e) {
         handleWindowClose();
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
     @Override
     public void windowClosed(WindowEvent e) {
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
+
     @Override
     public void windowIconified(WindowEvent e) {
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
+
     @Override
     public void windowDeiconified(WindowEvent e) {
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
     @Override
     public void windowActivated(WindowEvent e) {
 
     }
 
-    //EFFECTS:
-    //MODIFIES:
+
     @Override
     public void windowDeactivated(WindowEvent e) {
 
     }
 
 
-    //EFFECTS:
-    //MODIFIES:
     public HashMap<Integer, GradeLevel> getClasses() {
         return classes;
     }

@@ -12,6 +12,7 @@ import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+// A class representing a panel with many child components
 public class SidePanel extends JPanel implements ActionListener {
     private String[] gradeStrings = {"grade 7", "grade 8", "grade 9", "grade 10", "grade 11", "grade 12"};
     private MainFrame frame;
@@ -39,8 +40,7 @@ public class SidePanel extends JPanel implements ActionListener {
             "Geography", "History", "Philosophy"};
 
 
-    //EFFECT:
-    //MODIFIES
+    //EFFECT: creates a new Panel, initializes variables and add Panel to Frame
     public SidePanel(MainFrame frame) {
         this.frame = frame;
         this.setBorder(new LineBorder(Color.LIGHT_GRAY, 3));
@@ -48,13 +48,14 @@ public class SidePanel extends JPanel implements ActionListener {
         this.setBackground(Color.WHITE);
         addLeftPanel();
         frame.add(this, BorderLayout.WEST);
-        frame.add(imagePanel,BorderLayout.CENTER);
+        frame.add(imagePanel, BorderLayout.CENTER);
 
 
     }
 
-    //EFFECT:
-    //MODIFIES:
+
+    //MODIFIES:this
+    //EFFECT: initializes all variables, adds listeners to button and add subcomponents
     private void addLeftPanel() {
         initializeVariables();
         addActionListenerToButtons();
@@ -62,8 +63,8 @@ public class SidePanel extends JPanel implements ActionListener {
         addSecondPanel();
     }
 
-    //EFFECT:
-    //MODIFIES:
+    //EFFECT:instantiates declared variables
+    //MODIFIES:this
     private void initializeVariables() {
 
         firstNameLabel = new JLabel("First Name: ");
@@ -82,9 +83,8 @@ public class SidePanel extends JPanel implements ActionListener {
         updateSelection();
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //MODIFIES: this,leftGridPanel
+    //EFFECT: creates a new Panel, sets its properties and adds its child components
     private void addComponents() {
         JPanel leftGridPanel = new JPanel();
         this.setBackground(new Color(50, 123, 168));
@@ -109,8 +109,8 @@ public class SidePanel extends JPanel implements ActionListener {
         studentsDisplay = new StudentsDisplay(frame, gradeLevel);
     }
 
-    //EFFECT:
-    //MODIFIES:
+    //EFFECT:creates a new panel, adds a label to it and adds its subcomponents
+    //MODIFIES:this,secondPanel
     //REQUIRES:
     private void addSecondPanel() {
         JPanel secondPanel = new JPanel();
@@ -130,9 +130,9 @@ public class SidePanel extends JPanel implements ActionListener {
 
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //MODIFIES: this,frame
+    //EFFECT:adds event listeners to buttons, if comboBox selection has changed,
+    // remove studentDisplay from frame, revalidates and repaints frame
     private void addActionListenerToButtons() {
 
         registrationButton.addActionListener(this);
@@ -153,8 +153,9 @@ public class SidePanel extends JPanel implements ActionListener {
 
     }
 
-    //EFFECT:
-    //MODIFIES:
+    //EFFECT: get selection index and the class corresponding to index
+    // assigns that class to gradeLevel
+    //MODIFIES:this
     //REQUIRES:
     private void updateSelection() {
         gradeLevelSelection = comboBox.getSelectedIndex();
@@ -162,9 +163,8 @@ public class SidePanel extends JPanel implements ActionListener {
         gradeLevel = classes.get(gradeLevelSelection + 7);
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //EFFECT: executes actions corresponding to pressed button
+    //MODIFIES: this
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(registrationButton)) {
@@ -187,9 +187,10 @@ public class SidePanel extends JPanel implements ActionListener {
     }
 
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //EFFECT: if student delete button is pressed, grabs the entered id
+    //if id is empty, show error popup, else  finds the student with the id and delete it,
+    // throws NumberFormatException if id is not convertible to int
+    //MODIFIES: this
     private void handleStudentDelete() {
         int studentId;
         try {
@@ -206,9 +207,9 @@ public class SidePanel extends JPanel implements ActionListener {
 
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //EFFECT: if a student exists with the studentId, show confirmation popup
+    // and delete student if "yes" is selected and then show confirmation message of deletion
+    //MODIFIES:this
     private void executeDelete(int studentId) {
         secondComboBoxSelection = secondComboBox.getSelectedIndex();
         secondComboBoxSelectedGrade = classes.get(secondComboBoxSelection + 7);
@@ -232,9 +233,10 @@ public class SidePanel extends JPanel implements ActionListener {
         }
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //EFFECT: if idField value is not empty and id is an integer greater than 0,
+    //and selected grade is not null, find student with id and show their transcript,
+    // if any of the aforementioned conditions is not met, an error popup message is show to the user
+    // if an integer cannot be parsed from id field, show an error message too
     private void handleTranscriptDisplay() {
         int studentId = -1;
         if (idField.getText().isEmpty()) {
@@ -264,9 +266,8 @@ public class SidePanel extends JPanel implements ActionListener {
         }
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //EFFECT: executes function that displays transcript,
+    // if a runtime exception is thrown, show the error message
     private void executeStudentDisplay() {
         try {
             handleStudentDisplay();
@@ -276,9 +277,9 @@ public class SidePanel extends JPanel implements ActionListener {
         }
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //EFFECT:  runs handleRegistration with the values from firstNameField and lastNameField
+    // next resets the fields to empty strings, if an exception occurs,
+    // show a popup message with the exception message
     private void executeRegistration() {
         try {
             String firstName = firstNameField.getText();
@@ -292,9 +293,8 @@ public class SidePanel extends JPanel implements ActionListener {
         }
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //EFFECT: updates comboBox selections displays transcript and revalidates and repaints frame
+    //MODIFIES: this,frame
     private void handleStudentDisplay() {
         updateSelection();
 
@@ -304,9 +304,11 @@ public class SidePanel extends JPanel implements ActionListener {
         frame.repaint();
     }
 
-    //EFFECT:
-    //MODIFIES:
-    //REQUIRES:
+    //EFFECT:if gradeLevel is not null,firstName and lastName are not empty, creates a new student
+    //with firstName and lastName and then registers in gradeLevel
+    // if any of these above conditions are not met, show a popup error message.
+    //MODIFIES:this, gradeLevel
+
     private void handleRegistration(GradeLevel gradeLevel, String firstName, String lastName) {
         if (gradeLevel == null) {
             JOptionPane.showMessageDialog(frame, "Invalid Grade chosen");
@@ -325,9 +327,9 @@ public class SidePanel extends JPanel implements ActionListener {
         }
     }
 
-    //MODIFIES:
-    //REQUIRES:
-    //EFFECTS:
+    //MODIFIES:srcImg
+    //REQUIRES: w and h are position integers
+    //EFFECTS: sets the dimensions of srcImg to w and h and returns it
     //code credit:https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
     private Image getScaledImage(Image srcImg, int w, int h) {
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
