@@ -1,7 +1,7 @@
 {
     "name": "Grade 12",
     "students": [{
-        "last": "Elon",
+        "last": "Tabsoba",
         "gradeRecord": [
             {
                 "firstMidtermGrade": 0,
@@ -75,6 +75,6 @@
             }
         ],
         "id": 1,
-        "first": "Bale"
+        "first": "Edmond"
     }]
 }

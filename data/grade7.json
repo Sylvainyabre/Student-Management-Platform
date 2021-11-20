@@ -12,7 +12,7 @@
                     "finalExamGrade": 0
                 },
                 {
-                    "firstMidtermGrade": 0,
+                    "firstMidtermGrade": 16,
                     "name": "Biology",
                     "weight": 3,
                     "secondMidtermGrade": 0,
@@ -26,18 +26,18 @@
                     "finalExamGrade": 0
                 },
                 {
-                    "firstMidtermGrade": 0,
+                    "firstMidtermGrade": 13,
                     "name": "Chemistry",
                     "weight": 5,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
+                    "secondMidtermGrade": 20,
+                    "finalExamGrade": 15
                 },
                 {
                     "firstMidtermGrade": 0,
                     "name": "English",
                     "weight": 3,
                     "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
+                    "finalExamGrade": 20
                 },
                 {
                     "firstMidtermGrade": 0,
@@ -77,83 +77,6 @@
             ],
             "id": 1,
             "first": "Real"
-        },
-        {
-            "last": "Student",
-            "gradeRecord": [
-                {
-                    "firstMidtermGrade": 1,
-                    "name": "Mathematics",
-                    "weight": 5,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "Biology",
-                    "weight": 3,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "Physics",
-                    "weight": 5,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "Chemistry",
-                    "weight": 5,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "English",
-                    "weight": 3,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "French",
-                    "weight": 3,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "Physical Education",
-                    "weight": 1,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "Geography",
-                    "weight": 1,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "History",
-                    "weight": 1,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                },
-                {
-                    "firstMidtermGrade": 0,
-                    "name": "Philosophy",
-                    "weight": 2,
-                    "secondMidtermGrade": 0,
-                    "finalExamGrade": 0
-                }
-            ],
-            "id": 2,
-            "first": "First "
         },
         {
             "last": "Yabre",
@@ -229,7 +152,7 @@
                     "finalExamGrade": 0
                 }
             ],
-            "id": 3,
+            "id": 2,
             "first": "Sylvain"
         },
         {
@@ -306,7 +229,7 @@
                     "finalExamGrade": 0
                 }
             ],
-            "id": 4,
+            "id": 3,
             "first": "Alain"
         },
         {
@@ -383,8 +306,162 @@
                     "finalExamGrade": 0
                 }
             ],
-            "id": 5,
+            "id": 4,
             "first": "Yabre"
+        },
+        {
+            "last": "Chérie",
+            "gradeRecord": [
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Mathematics",
+                    "weight": 5,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Biology",
+                    "weight": 3,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Physics",
+                    "weight": 5,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Chemistry",
+                    "weight": 5,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "English",
+                    "weight": 3,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "French",
+                    "weight": 3,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Physical Education",
+                    "weight": 1,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Geography",
+                    "weight": 1,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "History",
+                    "weight": 1,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Philosophy",
+                    "weight": 2,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                }
+            ],
+            "id": 5,
+            "first": "Yasmine"
+        },
+        {
+            "last": "Zerbo",
+            "gradeRecord": [
+                {
+                    "firstMidtermGrade": 17,
+                    "name": "Mathematics",
+                    "weight": 5,
+                    "secondMidtermGrade": 13,
+                    "finalExamGrade": 16
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Biology",
+                    "weight": 3,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Physics",
+                    "weight": 5,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Chemistry",
+                    "weight": 5,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "English",
+                    "weight": 3,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "French",
+                    "weight": 3,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Physical Education",
+                    "weight": 1,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Geography",
+                    "weight": 1,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "History",
+                    "weight": 1,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                },
+                {
+                    "firstMidtermGrade": 0,
+                    "name": "Philosophy",
+                    "weight": 2,
+                    "secondMidtermGrade": 0,
+                    "finalExamGrade": 0
+                }
+            ],
+            "id": 6,
+            "first": "Awa"
         }
     ]
 }

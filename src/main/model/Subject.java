@@ -68,6 +68,7 @@ public class Subject {
     //EFFECTS: sets midterm 1 grade to the provided value
     public void setFirstMidtermGrade(double firstMidtermGrade) {
         this.firstMidtermGrade = firstMidtermGrade;
+
     }
 
     //MODIFIES: this
@@ -75,6 +76,7 @@ public class Subject {
     //EFFECTS: sets midterm 2 grade to the provided value
     public void setSecondMidtermGrade(double secondMidtermGrade) {
         this.secondMidtermGrade = secondMidtermGrade;
+
     }
 
     //MODIFIES: this

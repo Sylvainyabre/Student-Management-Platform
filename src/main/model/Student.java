@@ -78,6 +78,8 @@ public class Student {
     //MODIFIES:this
     //EFFECTS: sets the student's class to gradeLevel
     public void setGradeLevel(GradeLevel gradeLevel) {
+        EventLog.getInstance().logEvent(new Event("Set " + gradeLevel.getName()
+                + " for " + this.getFullName()));
         this.gradeLevel = gradeLevel;
     }
 
@@ -113,17 +115,20 @@ public class Student {
     //else if examNumber is 3 set finalExam grade to grade and return true,
     // if no subject exists with given name or if exam number is not one of (1,2,3),
 
-    public static void changeSubjectGrade(Subject subject, double grade, int examNumber) {
+    public void changeSubjectGrade(Subject subject, double grade, int examNumber) {
         if (examNumber == 1) {
             subject.setFirstMidtermGrade(grade);
+            EventLog.getInstance().logEvent(new Event("Midterm 1 grade updated for " + this.getFullName()));
 
         }
         if (examNumber == 2) {
             subject.setSecondMidtermGrade(grade);
+            EventLog.getInstance().logEvent(new Event("Midterm 2 grade updated for " + this.getFullName()));
 
         }
         if (examNumber == 3) {
             subject.setFinalExamGrade(grade);
+            EventLog.getInstance().logEvent(new Event("Final exam grade updated for " + this.getFullName()));
 
         }
 
@@ -142,7 +147,6 @@ public class Student {
     public void setId(int id) {
         this.id = id;
     }
-
 
 
     //EFFECTS: transform a student into a JSON object

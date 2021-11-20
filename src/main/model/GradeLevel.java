@@ -64,6 +64,8 @@ public class GradeLevel {
     public boolean removeStudentFromClass(int id) {
         for (Student student : students) {
             if (student.getId() == id) {
+                EventLog.getInstance().logEvent(new Event("Deleted " + student.getFullName()
+                        + " from " + student.getGradeLevel().getName()));
                 return students.remove(student);
             }
         }
@@ -81,6 +83,8 @@ public class GradeLevel {
             student.setId(students.size() + 1);
             student.setGradeLevel(this);
             students.add(student);
+            EventLog.getInstance().logEvent(new Event("Registered " + student.getFullName()
+                    + " in " + this.getName()));
             return true;
         } else {
             return false;
@@ -93,6 +97,7 @@ public class GradeLevel {
         for (KeyValuePair keyValue : SUBJECT_NAMES) {
             student.addSubject(new Subject(keyValue.getKey(), keyValue.getValue()));
         }
+        EventLog.getInstance().logEvent(new Event("Set subjects for" + student.getFullName()));
     }
 
 
@@ -117,7 +122,7 @@ public class GradeLevel {
     }
 
 
-    //EFFECTS: returns students in this Gradelevel as a JSON array
+    //EFFECTS: returns students in this @GradeLevel as a JSON array
     private JSONArray studentsToJson() {
         JSONArray jsonArray = new JSONArray();
 

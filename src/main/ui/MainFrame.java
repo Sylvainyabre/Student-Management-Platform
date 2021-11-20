@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.GradeLevel;
 
 import javax.swing.*;
@@ -38,11 +40,13 @@ public class MainFrame extends JFrame implements WindowListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: if user selects to save application state, write classes to file, exits.
+    //EFFECTS: if user selects to save application state, write classes to file,
+    // print event log and exits.
     private void handleWindowClose() {
         Popup popup = new Popup("Do you want your save your classes to file?", "Data Saving", this);
         if (popup.getResponse() == 0) {
             popup.writeClasses(this.classes);
+            printLogs();
 
         }
         System.exit(0);
@@ -98,6 +102,14 @@ public class MainFrame extends JFrame implements WindowListener {
         }
     }
 
+    //EFFECTS: for all events prints description and their dates to console.
+    private void printLogs() {
+        EventLog eventLog = EventLog.getInstance();
+        for (Event event : eventLog) {
+            System.out.println(event.toString() + "\n");
+        }
+
+    }
 
     //MODIFIES: this
     //EFFECTS: repaints and revalidates the frame when the window is open, after adding the side pane
@@ -109,7 +121,6 @@ public class MainFrame extends JFrame implements WindowListener {
         this.repaint();
 
 
-
     }
 
     //MODIFIES: this
@@ -117,6 +128,7 @@ public class MainFrame extends JFrame implements WindowListener {
     @Override
     public void windowClosing(WindowEvent e) {
         handleWindowClose();
+
 
     }
 

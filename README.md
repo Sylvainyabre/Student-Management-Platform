@@ -42,6 +42,40 @@ I open my application .
 
 
 
+##Phase 4: Task 2
 
+Sat Nov 20 14:20:54 PST 2021\
+Final exam grade updated for Another Student
 
+Sat Nov 20 14:20:54 PST 2021\
+Midterm 1 grade updated for Another Student
 
+Sat Nov 20 14:20:54 PST 2021\
+Midterm 2 grade updated for Another Student
+
+Sat Nov 20 14:20:54 PST 2021\
+Final exam grade updated for Another Student
+
+Sat Nov 20 14:21:50 PST 2021\
+Set subjects forZakaria Sanogo
+
+Sat Nov 20 14:21:50 PST 2021\
+Set Grade 8 for Zakaria Sanogo
+
+Sat Nov 20 14:21:50 PST 2021\
+Registered Zakaria Sanogo in Grade 8
+
+Sat Nov 20 14:22:14 PST 2021\
+Midterm 1 grade updated for Emar Yabre
+
+Sat Nov 20 14:22:52 PST 2021\
+Deleted Another Student from Grade 12
+
+Sat Nov 20 14:23:20 PST 2021\
+Set subjects forEdmond Tabsoba
+
+Sat Nov 20 14:23:20 PST 2021\
+Set Grade 12 for Edmond Tabsoba
+
+Sat Nov 20 14:23:20 PST 2021\
+Registered Edmond Tabsoba in Grade 12
