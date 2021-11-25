@@ -79,3 +79,22 @@ Set Grade 12 for Edmond Tabsoba
 
 Sat Nov 20 14:23:20 PST 2021\
 Registered Edmond Tabsoba in Grade 12
+
+##Phase 4: Task 3
+Below are the possible changes I would make if I had more time to work on this project:
+- I would have used the Observer Pattern to connect changes in any of my 6 GradeLevels (classes) 
+to changes in the MainFrame class. As one can see on the diagram, most of my classes have a field of type either 
+GradeLevel or MainFrame which results in a lot of coupling, the Observer pattern would reduce the degree of coupling.
+
+- The second change that I would make is to remove the KeyValuePair class, it plays the role of a Map,
+but with a small difference, however, I now see that I could still make things work with just a HashMap 
+instead of creating a new class.
+
+- The next change that I would make is implement the MainFrame class following the Singleton pattern,
+my application only needs one instance of MainFrame that is available globally 
+so that all the subcomponents can be added to it. If I use the singleton pattern, the other classes 
+will not need to maintain fields of type MainFrame. This would drastically reduce coupling in my code. 
+
+- The last change that I would make would be targetted at reducing the multiplicity of the association between the Popup
+class and JsonReader and JsonWriter. I can now see a better relationship where Popup uses only one 
+instance of the reader and the writer to achieve the same goal.

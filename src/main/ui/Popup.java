@@ -18,12 +18,6 @@ public class Popup {
     private JFrame frame;
     private int response;
 
-    private GradeLevel gradeSeven;
-    private GradeLevel gradeEight;
-    private GradeLevel gradeNine;
-    private GradeLevel gradeTen;
-    private GradeLevel gradeEleven;
-    private GradeLevel gradeTwelve;
     //readers
     private JsonReader grade7Reader;
     private JsonReader grade8Reader;
@@ -76,18 +70,12 @@ public class Popup {
         grade11Reader = new JsonReader("./data/grade11.json");
         grade12Reader = new JsonReader("./data/grade12.json");
 
-        gradeSeven = grade7Reader.read();
-        gradeEight = grade8Reader.read();
-        gradeNine = grade9Reader.read();
-        gradeTen = grade10Reader.read();
-        gradeEleven = grade11Reader.read();
-        gradeTwelve = grade12Reader.read();
-        classes.put(7, gradeSeven);
-        classes.put(8, gradeEight);
-        classes.put(9, gradeNine);
-        classes.put(10, gradeTen);
-        classes.put(11, gradeEleven);
-        classes.put(12, gradeTwelve);
+        classes.put(7, grade7Reader.read());
+        classes.put(8, grade8Reader.read());
+        classes.put(9, grade9Reader.read());
+        classes.put(10, grade10Reader.read());
+        classes.put(11, grade11Reader.read());
+        classes.put(12, grade12Reader.read());
 
         return classes;
 
@@ -144,18 +132,13 @@ public class Popup {
     //EFFECTS: sets the value of each gradeLevel to a new instance
     public HashMap<Integer, GradeLevel> createNewClasses() {
         HashMap<Integer, GradeLevel> classes = new HashMap<>();
-        gradeSeven = new GradeLevel("Grade 7");
-        gradeEight = new GradeLevel("Grade 8");
-        gradeNine = new GradeLevel("Grade 9");
-        gradeTen = new GradeLevel("Grade 10");
-        gradeEleven = new GradeLevel("Grade 11");
-        gradeTwelve = new GradeLevel("Grade 12");
-        classes.put(7, gradeSeven);
-        classes.put(8, gradeEight);
-        classes.put(9, gradeNine);
-        classes.put(10, gradeTen);
-        classes.put(11, gradeEleven);
-        classes.put(12, gradeTwelve);
+
+        classes.put(7, new GradeLevel("Grade 7"));
+        classes.put(8, new GradeLevel("Grade 8"));
+        classes.put(9, new GradeLevel("Grade 9"));
+        classes.put(10, new GradeLevel("Grade 10"));
+        classes.put(11, new GradeLevel("Grade 11"));
+        classes.put(12, new GradeLevel("Grade 12"));
         return classes;
 
 

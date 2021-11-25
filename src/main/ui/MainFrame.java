@@ -13,12 +13,7 @@ import java.util.HashMap;
 
 //A class representing the main frame on which all the other components will be placed
 public class MainFrame extends JFrame implements WindowListener {
-    private GradeLevel grade7;
-    private GradeLevel grade8;
-    private GradeLevel grade9;
-    private GradeLevel grade10;
-    private GradeLevel grade11;
-    private GradeLevel grade12;
+
     private HashMap<Integer, GradeLevel> classes;
 
 
@@ -73,28 +68,15 @@ public class MainFrame extends JFrame implements WindowListener {
     //MODIFIES:this
     //EFFECTS: creates new classes and assigns them to the class variables
     private void setNewClasses(Popup popup) {
-        HashMap<Integer, GradeLevel> classes = popup.createNewClasses();
-        grade7 = classes.get(7);
-        grade8 = classes.get(8);
-        grade9 = classes.get(9);
-        grade10 = classes.get(10);
-        grade11 = classes.get(11);
-        grade12 = classes.get(12);
-        this.classes = classes;
+
+        this.classes = popup.createNewClasses();
     }
 
     //EFFECTS: reads data from file and assigns it to its variables
     //MODIFIES:this
     private void executeDataLoading(Popup popup) {
         try {
-            HashMap<Integer, GradeLevel> classes = popup.getGradeLevelsFromFile();
-            grade7 = classes.get(7);
-            grade8 = classes.get(8);
-            grade9 = classes.get(9);
-            grade10 = classes.get(10);
-            grade11 = classes.get(11);
-            grade12 = classes.get(12);
-            this.classes = classes;
+            this.classes = popup.getGradeLevelsFromFile();
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "An error occurred");

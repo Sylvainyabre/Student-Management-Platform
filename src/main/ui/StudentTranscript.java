@@ -9,14 +9,12 @@ import java.util.ArrayList;
 
 // A class representing the transcript of a student
 public class StudentTranscript {
-    private Student student;
-    private MainFrame frame;
     private String[][] transcriptData;
     private String[] columns = {"Subject", "Weight", "Midterm 1", "Midterm 2", "Final Grade"};
 
     //Creates a new transcript belonging to student to be displayed on frame
     public StudentTranscript(MainFrame frame, Student student) {
-        this.student = student;
+
         transcriptData = new String[10][5];
         setTranscriptData(student);
         JPanel panel = new JPanel();
@@ -63,5 +61,4 @@ public class StudentTranscript {
         }
 
     }
-
 }

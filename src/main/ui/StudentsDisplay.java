@@ -16,7 +16,6 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
     private MainFrame frame;
     private String[][] data = new String[GradeLevel.MAX_CAPACITY][4];
     private String[] columns = {"ID", "First Name", "Last Name", "GPA (/20)"};
-    private HashMap<Integer, GradeLevel> classes;
     private GradeLevel selectedGradeLevel;
     private JTable table;
     private ListSelectionModel selectionModel;
@@ -27,7 +26,6 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
     public StudentsDisplay(MainFrame frame, GradeLevel gradeLevel) {
         this.frame = frame;
         this.selectedGradeLevel = gradeLevel;
-        classes = frame.getClasses();
         table = new JTable(data, columns);
 
         table.setCellSelectionEnabled(true);
@@ -56,7 +54,6 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
         this.setBorder(BorderFactory.createEmptyBorder(50, 5, 5, 5));
         this.setBounds(400, 300, 100, 100);
         this.setBackground(new Color(50, 123, 168));
-        ;
 
         this.add(pane);
 
@@ -99,8 +96,7 @@ public class StudentsDisplay extends JPanel implements ListSelectionListener {
     // EFFECTS: truncate the number into two decimal places and cast to float and returns it
     //REQUIRES: grade>0
     private float truncateGrade(double grade) {
-        float truncated = (float) (Math.floor(grade * 100) / 100);
-        return truncated;
+        return (float) (Math.floor(grade * 100) / 100);
     }
 
 }
