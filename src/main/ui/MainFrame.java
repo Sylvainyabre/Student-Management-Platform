@@ -16,7 +16,6 @@ public class MainFrame extends JFrame implements WindowListener {
 
     private HashMap<Integer, GradeLevel> classes;
 
-
     //EFFECTS: creates a new frame and adds all the child-components
     public MainFrame() {
 

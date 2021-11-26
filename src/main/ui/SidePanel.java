@@ -37,7 +37,7 @@ public class SidePanel extends JPanel implements ActionListener {
     private JPanel imagePanel;
     private String[] subjectNames = {"Mathematics", "Biology", "Physics", "Chemistry",
             "English", "French", "Physical Education",
-            "Geography", "History", "Philosophy"};
+            "Geography", "History", "Philosophy" };
 
 
     //EFFECT: creates a new Panel, initializes variables and add Panel to Frame

@@ -25,6 +25,7 @@ public class Popup {
     private JsonReader grade10Reader;
     private JsonReader grade11Reader;
     private JsonReader grade12Reader;
+
     //writers
     private JsonWriter grade7Writer;
     private JsonWriter grade8Writer;
